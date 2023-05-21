@@ -1,0 +1,36 @@
+﻿@using System.Linq;
+
+@model PocketIS.ReportGenerator.ReportSubReportModel<PocketIS.Models.Report.QualityPolicyReportModel>
+
+@{
+    var qualityPoliciesExternal = Model?.Model?.QualityPolicies?.Where(x => x.IsExternal)?.ToList() ?? new List<PocketIS.Models.QualityPolicy.QualityPolicyModel>();
+    var qualityPoliciesInternal = Model?.Model?.QualityPolicies?.Where(x => x.IsInternal)?.ToList() ?? new List<PocketIS.Models.QualityPolicy.QualityPolicyModel>();
+
+    var length = qualityPoliciesExternal.Count >= qualityPoliciesInternal.Count ? qualityPoliciesExternal.Count : qualityPoliciesInternal.Count;
+}
+
+<div class="content">
+    <h2>Firma ...... jest dynamicznie rozwijającym  się ......</h2>
+
+    <h2>Strategicznym celem firmy jest zapewnienie obecnym oraz przyszłym klientom stałego dostarczania wyrobów spełniających ich potrzeby i oczekiwania oraz wymaganiom mających zastosowanie wymagań prawnych.</h2>
+
+    <h2>Cele realizujemy poprzez:</h2>
+
+    <table style="width:100%;">
+      <tr>
+        <th>Wewnętrzne</th>
+        <th>Zewnętrzne</th>
+      </tr>
+      @for(int i = 0; i < length; i++)
+        {
+            var qualityPoliciesExternalName = qualityPoliciesExternal.ElementAtOrDefault(i) != null ? qualityPoliciesExternal[i].Name : "";
+            var qualityPoliciesInternalName = qualityPoliciesInternal.ElementAtOrDefault(i) != null ? qualityPoliciesInternal[i].Name : "";
+            
+            <tr>
+                <td>@qualityPoliciesInternalName</td>
+                <td>@qualityPoliciesExternalName</td>
+            </tr>
+        }
+
+    </table>
+</div>

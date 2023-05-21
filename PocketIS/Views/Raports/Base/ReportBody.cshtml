@@ -1,0 +1,7 @@
+﻿@{
+    ViewData["Title"] = "PocketIS";
+    Layout = "~/Views/Raports/Base/_ReportLayout.cshtml";
+    string viewName = "~/Views/Raports/" + Model.SubReport + ".cshtml";
+}
+
+@await Html.PartialAsync(viewName)

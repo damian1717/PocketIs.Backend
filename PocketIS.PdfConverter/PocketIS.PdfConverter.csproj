@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HtmlRendererCore" Version="1.0.1" />
+    <PackageReference Include="PDFSharp.NetStandard2" Version="1.51.5185.1" />
+    <PackageReference Include="System.Text.Encoding.CodePages" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PocketIS.Services.Interfaces\PocketIS.Services.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

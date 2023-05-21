@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <COMReference Include="{d37e2a3e-8545-3a39-9f4f-31827c9124ab}">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>4</VersionMinor>
+      <VersionMajor>2</VersionMajor>
+      <Guid>d37e2a3e-8545-3a39-9f4f-31827c9124ab</Guid>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PocketIS.Common\PocketIS.Common.csproj" />
+    <ProjectReference Include="..\PocketIS.Infrastucture\PocketIS.Infrastucture.csproj" />
+    <ProjectReference Include="..\PocketIS.ReportGenerator\PocketIS.ReportGenerator.csproj" />
+    <ProjectReference Include="..\PocketIS.Repositories\PocketIS.Repositories.csproj" />
+    <ProjectReference Include="..\PocketIS.Services.Interfaces\PocketIS.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\PocketIS.Services\PocketIS.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Controllers\" />
+    <Folder Include="Resources\Views\Reports\Components\" />
+    <Folder Include="Resources\Views\Reports\Base\" />
+    <Folder Include="Views\Raports\Base\" />
+  </ItemGroup>
+
+</Project>

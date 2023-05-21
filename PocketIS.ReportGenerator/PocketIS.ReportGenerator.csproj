@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="HtmlToPdfConverter.cs~RF86b3cf7.TMP" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AngleSharp" Version="0.13.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.5" />
+		<PackageReference Include="PDFSharp.NetStandard2" Version="1.51.5185.1" />
+		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-beta0006" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\PocketIS.Infrastucture\PocketIS.Infrastucture.csproj" />
+	  <ProjectReference Include="..\PocketIS.PdfConverter\PocketIS.PdfConverter.csproj" />
+	  <ProjectReference Include="..\PocketIS.Services.Interfaces\PocketIS.Services.Interfaces.csproj" />
+	</ItemGroup>
+
+</Project>
