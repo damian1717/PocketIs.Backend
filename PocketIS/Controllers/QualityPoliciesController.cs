@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PocketIS.Domain;
 using PocketIS.Models.QualityPolicy;
 using PocketIS.Services.Interfaces;
 
 namespace PocketIS.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class QualityPoliciesController : ControllerBase
+    [Route("api/[controller]")]
+    public class QualityPoliciesController : BaseController
     {
         private readonly IQualityPoliciesService _qualityPoliciesService;
         public QualityPoliciesController(IQualityPoliciesService qualityPoliciesService)

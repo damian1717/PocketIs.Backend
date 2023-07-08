@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PocketIS.Domain;
 using PocketIS.Models.Regulation;
 using PocketIS.Services.Interfaces;
 
 namespace PocketIS.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class RegulationController : ControllerBase
+    [Route("api/[controller]")]
+    public class RegulationController : BaseController
     {
         private readonly IRegulationService _regulationService;
         public RegulationController(IRegulationService regulationService)

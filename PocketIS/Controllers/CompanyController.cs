@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PocketIS.Domain;
 using PocketIS.Models.Company;
 using PocketIS.Services.Interfaces;
 
 namespace PocketIS.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class CompanyController : ControllerBase
+    [Route("api/[controller]")]
+    public class CompanyController : BaseController
     {
         private readonly ICompanyService _companyService;
         public CompanyController(ICompanyService companyService)

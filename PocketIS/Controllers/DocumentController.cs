@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PocketIS.Common;
 using PocketIS.Services.Interfaces;
 
 namespace PocketIS.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class DocumentController : ControllerBase
+    [Route("api/[controller]")]
+    public class DocumentController : BaseController
     {
         private readonly IDocumentService _documentService;
         public DocumentController(IDocumentService documentService)

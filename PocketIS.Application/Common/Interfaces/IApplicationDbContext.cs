@@ -9,6 +9,8 @@ namespace PocketIS.Application.Common.Interfaces
         DbSet<Company> Companies { get; set; }
         DbSet<QualityPolicy> QualityPolicies { get; set; }
         DbSet<Regulation> Regulations { get; set; }
+        DbSet<User> Users { get; set; }
+        DbSet<RefreshToken> RefreshTokens { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

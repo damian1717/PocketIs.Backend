@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PocketIS.Common;
 using PocketIS.Domain;
 using PocketIS.Framwork;
@@ -9,9 +10,10 @@ using PocketIS.Services.Interfaces;
 
 namespace PocketIS.Controllers
 {
+    [Authorize]
     [ApiController]
-    [Route("[controller]")]
-    public class RaportController : ControllerBase
+    [Route("api/[controller]")]
+    public class RaportController : BaseController
     {
         private readonly IDocumentService _documentService;
         private readonly IRenderRazorToStringService _renderService;

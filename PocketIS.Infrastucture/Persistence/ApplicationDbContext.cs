@@ -15,6 +15,8 @@ namespace PocketIS.Infrastucture.Persistence
         public DbSet<Company> Companies { get; set; }
         public DbSet<QualityPolicy> QualityPolicies { get; set; }
         public DbSet<Regulation> Regulations { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public Task<int> SaveChangesAsync()
         {
             return base.SaveChangesAsync();
