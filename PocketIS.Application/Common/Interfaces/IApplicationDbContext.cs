@@ -11,6 +11,7 @@ namespace PocketIS.Application.Common.Interfaces
         DbSet<Regulation> Regulations { get; set; }
         DbSet<User> Users { get; set; }
         DbSet<RefreshToken> RefreshTokens { get; set; }
+        DbSet<OrganizationChartPerson> OrganizationChartPersons { get; set; }
         Task<int> SaveChangesAsync();
     }
 }
