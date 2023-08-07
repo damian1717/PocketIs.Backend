@@ -11,6 +11,8 @@ namespace PocketIS.Domain
             RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.CultureInvariant);
 
         public Guid Id { get; private set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; private set; }
         public string Role { get; private set; }
         public string PasswordHash { get; private set; }
@@ -21,7 +23,7 @@ namespace PocketIS.Domain
         {
         }
 
-        public User(Guid id, string email, string role)
+        public User(Guid id, string email, string role, string firstName, string lastName)
         {
             if (!EmailRegex.IsMatch(email))
             {
@@ -35,6 +37,8 @@ namespace PocketIS.Domain
             }
             Id = id;
             Email = email.ToLowerInvariant();
+            FirstName = firstName;
+            LastName = lastName;
             Role = role.ToLowerInvariant();
             InsertedDate = DateTime.Now;
             UpdatedDate = DateTime.Now;

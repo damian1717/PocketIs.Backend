@@ -29,7 +29,7 @@ namespace PocketIS.Services
             _claimsProviderService = claimsProviderService;
         }
 
-        public async Task SignUpAsync(Guid id, string email, string password, string role = Role.User)
+        public async Task SignUpAsync(Guid id, string email, string password, string firstName, string lastName, string role = Role.User)
         {
             var user = await _userService.GetAsync(email);
             if (user != null)
@@ -41,7 +41,7 @@ namespace PocketIS.Services
             {
                 role = Role.User;
             }
-            user = new User(id, email, role);
+            user = new User(id, email, role, firstName, lastName);
             user.SetPassword(password, _passwordHasher);
             await _userService.AddAsync(user);
         }

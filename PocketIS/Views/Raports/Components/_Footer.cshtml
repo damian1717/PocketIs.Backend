@@ -1,4 +1,12 @@
-﻿<div class="footer">
+﻿@model PocketIS.ReportGenerator.ReportSubReportModel<PocketIS.Models.Report.QualityPolicyReportModel>
+
+@{
+    var user = Model?.User;
+    var firstName = user?.FirstName ?? string.Empty;
+    var lastName = user?.LastName ?? string.Empty;
+}
+
+<div class="footer">
     <div class="separator"></div>
-    <p>Polityka Jakości , z dn. 27.03.2023, wer. 1/2023, utworzył: Imię i Nazwisko, aktualizował: Imię i Naziwsko, zatwierdził: Imię i Nazwisko utworzona na licencji PocketISo</p>
+    <p>Polityka Jakości , z dn. 27.03.2023, wer. 1/2023, utworzył: @firstName @lastName, aktualizował: @firstName @lastName, zatwierdził: @firstName @lastName utworzona na licencji PocketISo</p>
 </div>

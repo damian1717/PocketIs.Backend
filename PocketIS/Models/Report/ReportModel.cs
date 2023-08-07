@@ -1,4 +1,5 @@
-﻿using PocketIS.ReportGenerator;
+﻿using PocketIS.Domain;
+using PocketIS.ReportGenerator;
 
 namespace PocketIS.Models.Report
 {
@@ -6,21 +7,24 @@ namespace PocketIS.Models.Report
     {
         
         private readonly QualityPolicyReportModel _reportData;
+        private readonly User _user;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="reportData">Report data</param>
-        public ReportModel(QualityPolicyReportModel reportData)
+        /// <param name="user">User Info</param>
+        public ReportModel(QualityPolicyReportModel reportData, User user)
         {
             _reportData = reportData;
+            _user = user;
         }
 
         
 
         public IEnumerable<ReportSubReportModel<QualityPolicyReportModel>> GetSubReports()
         {
-            yield return new ReportSubReportModel<QualityPolicyReportModel> { Model = _reportData, SubReport = "Components/_Content" };
+            yield return new ReportSubReportModel<QualityPolicyReportModel> { Model = _reportData, User = _user, SubReport = "Components/_Content" };
         }
     }
 }

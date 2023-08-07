@@ -17,15 +17,22 @@ namespace PocketIS.Controllers
     {
         private readonly IDocumentService _documentService;
         private readonly IRenderRazorToStringService _renderService;
-        public RaportController(IDocumentService documentService, IRenderRazorToStringService renderService)
+        private readonly IIdentityService _identityService;
+        public RaportController(IDocumentService documentService, IRenderRazorToStringService renderService, IIdentityService identityService)
         {
             Check.NotNull(_documentService = documentService, nameof(documentService));
             Check.NotNull(_renderService = renderService, nameof(renderService));
+            Check.NotNull(_identityService = identityService, nameof(identityService));
         }
 
         [HttpPost]
         [Route("GenerateRaportPdf")]
-        public async Task<IActionResult> GenerateRaportPdf(QualityPolicyReportModel model) => await GeneratePdfReportAsync(ReportViews.GetDefault(), new ReportModel(model), null);
+        public async Task<IActionResult> GenerateRaportPdf(QualityPolicyReportModel model)
+        {
+            var user = await _identityService.GetUserByIdAsync(UserId);
+
+            return await GeneratePdfReportAsync(ReportViews.GetDefault(), new ReportModel(model, user), null);
+        }
 
         /// <summary>   
         /// Generates a report in PDF format

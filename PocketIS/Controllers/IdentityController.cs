@@ -32,7 +32,7 @@ namespace PocketIS.Controllers
         public async Task<IActionResult> SignUp(SignUpRequest request)
         {
             await _identityService.SignUpAsync(request.Id,
-                request.Email, request.Password, request.Role);
+                request.Email, request.Password, request.FirstName, request.LastName, request.Role);
 
             return NoContent();
         }

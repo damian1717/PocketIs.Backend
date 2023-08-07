@@ -1,4 +1,6 @@
-﻿namespace PocketIS.ReportGenerator
+﻿using PocketIS.Domain;
+
+namespace PocketIS.ReportGenerator
 {
     public class ReportSubReportModel<T>
     {
@@ -10,5 +12,6 @@
         public string FooterLine1Key { get; set; } = "FooterLine1";
         public int TotalPages { get; set; }
         public int CurrentPage { get; set; }
+        public User User { get; set; }
     }
 }
