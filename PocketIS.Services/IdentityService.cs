@@ -35,24 +35,24 @@ namespace PocketIS.Services
             if (user != null)
             {
                 throw new PocketISException(IdentityCodes.EmailInUse,
-                    $"Email: '{email}' is already in use.");
+                    $"Email: '{email}' jest już uzywany.");
             }
             if (string.IsNullOrWhiteSpace(role))
             {
                 role = Role.User;
             }
-            user = new User(id, email, role, firstName, lastName);
-            user.SetPassword(password, _passwordHasher);
-            await _userService.AddAsync(user);
+            var newUser = new User(id, email, role, firstName, lastName);
+            newUser.SetPassword(password, _passwordHasher);
+            await _userService.AddAsync(newUser);
         }
 
         public async Task<JsonWebToken> SignInAsync(string email, string password)
         {
-            var user = await _userService.GetAsync(email);
+            var user = await _userService.GetUserForIdentityAsync(email);
             if (user == null || !user.ValidatePassword(password, _passwordHasher))
             {
                 throw new PocketISException(IdentityCodes.InvalidCredentials,
-                    "Invalid credentials.");
+                    "Niewłaściwe dane.");
             }
             var refreshToken = new RefreshToken(user, _passwordHasher);
             var claims = await _claimsProviderService.GetAsync(user.Id);
@@ -63,24 +63,21 @@ namespace PocketIS.Services
             return jwt;
         }
 
-        public async Task ChangePasswordAsync(Guid userId, string currentPassword, string newPassword)
+        public async Task ChangePasswordAsync(string email, string currentPassword, string newPassword)
         {
-            var user = await _userService.GetAsync(userId);
+            var user = await _userService.GetUserForIdentityAsync(email);
             if (user == null)
             {
                 throw new PocketISException(IdentityCodes.UserNotFound,
-                    $"User with id: '{userId}' was not found.");
+                    $"Użytkownik z email: '{email}' nie został znaleziony.");
             }
             if (!user.ValidatePassword(currentPassword, _passwordHasher))
             {
                 throw new PocketISException(IdentityCodes.InvalidCurrentPassword,
-                    "Invalid current password.");
+                    "Niewłaściwe dane.");
             }
             user.SetPassword(newPassword, _passwordHasher);
             await _userService.UpdateAsync(user);
         }
-
-        public async Task<User> GetUserByIdAsync(Guid id)
-            => await _userService.GetAsync(id);
     }
 }

@@ -2,8 +2,8 @@
 {
     public class ChangePasswordRequest
     {
-        public Guid UserId { get; }
-        public string CurrentPassword { get; }
-        public string NewPassword { get; }
+        public string Email { get; set; }
+        public string CurrentPassword { get; set; }
+        public string NewPassword { get; set; }
     }
 }

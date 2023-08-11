@@ -8,7 +8,6 @@ namespace PocketIS.Services.Interfaces
     {
         Task SignUpAsync(Guid id, string email, string password, string firstName, string lastName, string role = Role.User);
         Task<JsonWebToken> SignInAsync(string email, string password);
-        Task ChangePasswordAsync(Guid userId, string currentPassword, string newPassword);
-        Task<User> GetUserByIdAsync(Guid id);
+        Task ChangePasswordAsync(string email, string currentPassword, string newPassword);
     }
 }

@@ -2,6 +2,7 @@
 using PocketIS.Repositories.Interfaces;
 using PocketIS.Services.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocketIS.Services
@@ -15,10 +16,69 @@ namespace PocketIS.Services
         }
         public async Task AddAsync(User user) => await _userRepository.AddAsync(user);
 
-        public async Task<User> GetAsync(Guid id) => await _userRepository.GetAsync(id);
+        public async Task<List<UserInfo>> GetAllUsersAsync()
+        {
+            var newUsers = new List<UserInfo>();
 
-        public async Task<User> GetAsync(string email) => await _userRepository.GetAsync(email);
+            var users = await _userRepository.GetAllUsersAsync();
+            
+            if (users is null || users.Count == 0) return newUsers;
+
+            foreach (var user in users)
+            {
+                var newUser = new UserInfo
+                {
+                    Id = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Role = user.Role
+                };
+
+                newUsers.Add(newUser);
+            }
+
+            return newUsers;
+        }
+
+        public async Task<UserInfo> GetAsync(Guid id)
+        {
+            var user = await _userRepository.GetAsync(id);
+
+            if (user is null) return null;
+
+            return new UserInfo
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Role = user.Role
+            };
+        }
+
+        public async Task<UserInfo> GetAsync(string email)
+        {
+            var user = await _userRepository.GetAsync(email);
+
+            if (user is null) return null;
+
+            return new UserInfo
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Role = user.Role
+            };
+        }
 
         public async Task UpdateAsync(User user) => await _userRepository.UpdateAsync(user);
+
+        public async Task DeleteAsync(Guid id) => await _userRepository.DeleteAsync(id);
+
+        public async Task<User> GetUserForIdentityAsync(Guid id) => await _userRepository.GetAsync(id);
+
+        public async Task<User> GetUserForIdentityAsync(string email) => await _userRepository.GetAsync(email);
     }
 }

@@ -13,14 +13,19 @@ namespace PocketIS.Domain
         public Guid Id { get; private set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; private set; }
-        public string Role { get; private set; }
+        public string Email { get; set; }
+        public string Role { get; set; }
         public string PasswordHash { get; private set; }
         public DateTime InsertedDate { get; private set; }
         public DateTime UpdatedDate { get; private set; }
 
         protected User()
         {
+        }
+
+        public User(Guid id)
+        {
+            Id = id;
         }
 
         public User(Guid id, string email, string role, string firstName, string lastName)

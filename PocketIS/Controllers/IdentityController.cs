@@ -19,11 +19,6 @@ namespace PocketIS.Controllers
         }
 
         [Authorize]
-        [HttpGet("GetUserByIdAsync/{id}")]
-        public async Task<ActionResult<User>> GetUserByIdAsync([FromRoute] Guid id)
-            => Ok(await _identityService.GetUserByIdAsync(id));
-
-        [Authorize]
         [HttpGet("me")]
         [JwtAuth]
         public IActionResult Get() => Content($"Your id: '{UserId:N}'.");
@@ -45,7 +40,7 @@ namespace PocketIS.Controllers
         [JwtAuth]
         public async Task<ActionResult> ChangePassword(ChangePasswordRequest request)
         {
-            await _identityService.ChangePasswordAsync(request.UserId,
+            await _identityService.ChangePasswordAsync(request.Email,
                 request.CurrentPassword, request.NewPassword);
 
             return NoContent();
