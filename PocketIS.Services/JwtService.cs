@@ -1,16 +1,4 @@
-﻿/*using Microsoft.IdentityModel.JsonWebTokens;
-using Microsoft.IdentityModel.Tokens;
-using PocketIS.Application.Common.Authentication;
-using PocketIS.Domain;
-using PocketIS.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-*/
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using PocketIS.Application.Common.Authentication;
 using PocketIS.Domain;
 using PocketIS.Services.Interfaces;
@@ -48,7 +36,7 @@ namespace PocketIS.Services
                 new Claim(JwtRegisteredClaimNames.Sub, userId),
                 new Claim(JwtRegisteredClaimNames.UniqueName, userId),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString()),
+                new Claim(JwtRegisteredClaimNames.Iat, now.ToTimestamp().ToString())
             };
             if (!string.IsNullOrWhiteSpace(role))
             {

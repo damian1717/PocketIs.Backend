@@ -18,7 +18,7 @@ namespace PocketIS.Services
 
         public async Task<Regulation> GetRegulationByIdAsync(Guid id) => await _regulationRepository.GetRegulationByIdAsync(id);
 
-        public async Task<List<Regulation>> GetRegulationsAsync() => await _regulationRepository.GetRegulationsAsync();
+        public async Task<List<Regulation>> GetRegulationsAsync(Guid companyId) => await _regulationRepository.GetRegulationsAsync(companyId);
 
         public async Task UpdateRegulationAsync(Regulation regulation) => await _regulationRepository.UpdateRegulationAsync(regulation);
     }

@@ -28,7 +28,8 @@ namespace PocketIS.Controllers
                 Position = model.Position,
                 BelowPersonId = model.BelowPersonId,
                 InsertedDate = DateTime.Now,
-                Level = model.Level
+                Level = model.Level,
+                CompanyId = CompanyId
             };
 
             await _organizationChartService.AddOrganizationChartPersonAsync(organizationChartPerson);
@@ -58,7 +59,7 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("GetPersonsListOrganizationChart")]
-        public async Task<IActionResult> Get() => Ok(await _organizationChartService.GetListOfPersonsAsync());
+        public async Task<IActionResult> Get() => Ok(await _organizationChartService.GetListOfPersonsAsync(CompanyId));
 
         [HttpGet]
         [Route("GetPersonOrganizationChart/{id}")]

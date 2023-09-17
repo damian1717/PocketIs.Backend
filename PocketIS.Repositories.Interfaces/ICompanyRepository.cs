@@ -11,5 +11,6 @@ namespace PocketIS.Repositories.Interfaces
         Task UpdateCompanyAsync(Company company);
         Task<List<Company>> GetCompaniesAsync();
         Task<Company> GetCompanyByIdAsync(Guid id);
+        Task<Company> GetCompanyByCodeAsync(string code);
     }
 }

@@ -27,7 +27,7 @@ namespace PocketIS.Controllers
 
         [HttpGet("GetUsers")]
         public async Task<ActionResult<User>> GetUsers()
-            => Ok(await _userService.GetAllUsersAsync());
+            => Ok(await _userService.GetAllUsersAsync(CompanyId));
 
         [HttpPost]
         [Route("updateuser")]
@@ -35,7 +35,7 @@ namespace PocketIS.Controllers
         {
             if (model?.Id is null) return BadRequest();
 
-            var user = new User(model.Id, model.Email, model.Role, model.FirstName, model.LastName);
+            var user = new User(model.Id, model.Email, model.Role, model.FirstName, model.LastName, Guid.Empty);
 
             await _userService.UpdateAsync(user);
             return Ok();

@@ -26,7 +26,8 @@ namespace PocketIS.Controllers
                 Name = model.Name,
                 IsExternal = model.IsExternal,
                 IsInternal = model.IsInternal,
-                InsertedDate = DateTime.Now
+                InsertedDate = DateTime.Now,
+                CompanyId = CompanyId
             };
 
             await _qualityPoliciesService.AddQualityPolicyAsync(qualityPolicy);
@@ -54,7 +55,7 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("getqualitypolicies")]
-        public async Task<IActionResult> Get() => Ok(await _qualityPoliciesService.GetQualityPoliciesAsync());
+        public async Task<IActionResult> Get() => Ok(await _qualityPoliciesService.GetQualityPoliciesAsync(CompanyId));
 
         [HttpGet]
         [Route("getqualitypolicy/{id}")]

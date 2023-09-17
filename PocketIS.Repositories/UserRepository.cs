@@ -4,6 +4,7 @@ using PocketIS.Domain;
 using PocketIS.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
@@ -21,7 +22,7 @@ namespace PocketIS.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<User>> GetAllUsersAsync() => await _dbContext.Users.ToListAsync();
+        public async Task<List<User>> GetAllUsersAsync(Guid companyId) => await _dbContext.Users.Where(x => x.CompanyId == companyId).ToListAsync();
 
         public async Task<User> GetAsync(Guid id) => await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id);
 
@@ -41,7 +42,6 @@ namespace PocketIS.Repositories
                 _dbContext.Users.Update(currentUser);
                 await _dbContext.SaveChangesAsync();
             }
-            
         }
 
         public async Task DeleteAsync(Guid id)

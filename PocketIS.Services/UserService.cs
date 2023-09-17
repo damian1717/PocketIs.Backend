@@ -16,11 +16,11 @@ namespace PocketIS.Services
         }
         public async Task AddAsync(User user) => await _userRepository.AddAsync(user);
 
-        public async Task<List<UserInfo>> GetAllUsersAsync()
+        public async Task<List<UserInfo>> GetAllUsersAsync(Guid companyId)
         {
             var newUsers = new List<UserInfo>();
 
-            var users = await _userRepository.GetAllUsersAsync();
+            var users = await _userRepository.GetAllUsersAsync(companyId);
             
             if (users is null || users.Count == 0) return newUsers;
 
@@ -53,7 +53,8 @@ namespace PocketIS.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                Role = user.Role
+                Role = user.Role,
+                CompanyId = user.CompanyId
             };
         }
 
@@ -69,7 +70,8 @@ namespace PocketIS.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                Role = user.Role
+                Role = user.Role,
+                CompanyId = user.CompanyId
             };
         }
 

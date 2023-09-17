@@ -25,6 +25,7 @@ namespace PocketIS.Controllers
             var company = new Company
             {
                 Name = model.Name,
+                Code = model.Code,
                 Director = model.Director,
                 Nip = model.Nip,
                 City = model.City,
@@ -56,6 +57,7 @@ namespace PocketIS.Controllers
             var company = new Company
             {
                 Id = model.Id,
+                Code = model.Code,
                 Name = model.Name,
                 Director = model.Director,
                 Nip = model.Nip,

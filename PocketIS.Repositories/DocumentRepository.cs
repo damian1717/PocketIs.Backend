@@ -16,10 +16,10 @@ namespace PocketIS.Repositories
         {
             _dbContext = dbContext;
         }
-        public async Task<List<Document>> GetAllDocumentsAsync() => await _dbContext.Documents.ToListAsync();
+        public async Task<List<Document>> GetAllDocumentsAsync(Guid companyId) => await _dbContext.Documents.Where(x => x.CompanyId == companyId).ToListAsync();
 
-        public async Task<List<Document>> GetAllDocumentsByCodeAsync(string code) =>
-            await _dbContext.Documents.Where(x => x.Code == code).OrderByDescending(x => x.InsertedDate).ToListAsync();
+        public async Task<List<Document>> GetAllDocumentsByCodeAsync(string code, Guid companyId) =>
+            await _dbContext.Documents.Where(x => x.Code == code && x.CompanyId == companyId).OrderByDescending(x => x.InsertedDate).ToListAsync();
         public async Task<Document> GetDocumnetAsync(Guid id) => await _dbContext.Documents.FindAsync(id);
 
         public async Task<int> SaveDocumentAsync(Document document)

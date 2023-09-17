@@ -23,10 +23,10 @@ namespace PocketIS.Services
 
         public async Task<OrganizationChartPerson> GetListOfPersonAsync(Guid id) => await _organizationChartRepository.GetListOfPersonAsync(id);
 
-        public async Task<List<OrganizationChartPersonModel>> GetListOfPersonsAsync()
+        public async Task<List<OrganizationChartPersonModel>> GetListOfPersonsAsync(Guid companyId)
         {
             var newList = new List<OrganizationChartPersonModel>();
-            var organizationChartPersons = await _organizationChartRepository.GetListOfPersonsAsync();
+            var organizationChartPersons = await _organizationChartRepository.GetListOfPersonsAsync(companyId);
 
             var namesOfPersons = organizationChartPersons.ToDictionary(x => x.Id, z => $"{z.Name} {z.LastName}");
 

@@ -18,6 +18,8 @@ namespace PocketIS.Domain
         public string PasswordHash { get; private set; }
         public DateTime InsertedDate { get; private set; }
         public DateTime UpdatedDate { get; private set; }
+        public Guid CompanyId { get; set; }
+        public Company Company { get; set; } = null!;
 
         protected User()
         {
@@ -28,7 +30,7 @@ namespace PocketIS.Domain
             Id = id;
         }
 
-        public User(Guid id, string email, string role, string firstName, string lastName)
+        public User(Guid id, string email, string role, string firstName, string lastName, Guid companyId)
         {
             if (!EmailRegex.IsMatch(email))
             {
@@ -42,6 +44,7 @@ namespace PocketIS.Domain
             }
             Id = id;
             Email = email.ToLowerInvariant();
+            CompanyId = companyId;
             FirstName = firstName;
             LastName = lastName;
             Role = role.ToLowerInvariant();

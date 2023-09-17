@@ -26,6 +26,7 @@ namespace PocketIS.Controllers
                 Name = model.Name,
                 Link = model.Link,
                 Description = model.Description,
+                CompanyId = CompanyId,
                 InsertedDate = DateTime.Now
             };
 
@@ -54,7 +55,7 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("getregulations")]
-        public async Task<IActionResult> Get() => Ok(await _regulationService.GetRegulationsAsync());
+        public async Task<IActionResult> Get() => Ok(await _regulationService.GetRegulationsAsync(CompanyId));
 
         [HttpGet]
         [Route("getregulation/{id}")]

@@ -6,7 +6,7 @@ namespace PocketIS.Services.Interfaces
 {
     public interface IIdentityService
     {
-        Task SignUpAsync(Guid id, string email, string password, string firstName, string lastName, string role = Role.User);
+        Task SignUpAsync(Guid id, string email, string password, string firstName, string lastName, string companyCode, Guid companyId, string role = Role.User);
         Task<JsonWebToken> SignInAsync(string email, string password);
         Task ChangePasswordAsync(string email, string currentPassword, string newPassword);
     }

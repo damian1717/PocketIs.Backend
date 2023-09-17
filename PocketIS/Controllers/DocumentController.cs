@@ -20,7 +20,7 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("GetDocumentsByCode")]
-        public async Task<IActionResult> Get(string code) => Ok(await _documentService.GetAllDocumentsByCodeAsync(code));
+        public async Task<IActionResult> Get(string code) => Ok(await _documentService.GetAllDocumentsByCodeAsync(code, CompanyId));
 
         [HttpGet]
         [Route("GetDocument")]
@@ -46,10 +46,11 @@ namespace PocketIS.Controllers
             var document = new Document
             {
                 Id = Guid.NewGuid(),
-                Code = DocumentsCodes.ORG_CHAR,
-                Name = $"SCHEMAT_ORGANIZACJI - {Guid.NewGuid()}",
+                Code = RaportCodes.OrganizationChart,
+                Name = await GetRaportNameAsync(),
                 FileData = await GetBytes(file),
-                InsertedDate = DateTime.Now
+                InsertedDate = DateTime.Now,
+                CompanyId = CompanyId
             };
 
             await _documentService.SaveDocumentAsync(document);
@@ -63,6 +64,16 @@ namespace PocketIS.Controllers
             await using var memoryStream = new MemoryStream();
             await formFile.CopyToAsync(memoryStream);
             return memoryStream.ToArray();
+        }
+
+        private async Task<string> GetRaportNameAsync()
+        {
+            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.OrganizationChart, CompanyId);
+
+            var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
+            var currentDate = DateTime.Now.ToString("dd-MM-yyyy");
+            var raportName = $"Schemat_organizacji_{numberForRaport}_{currentDate}";
+            return raportName;
         }
     }
 }

@@ -30,6 +30,8 @@ namespace PocketIS.Repositories
 
         public async Task<List<Company>> GetCompaniesAsync() => await _dbContext.Companies.ToListAsync();
 
-        public async Task<Company> GetCompanyByIdAsync(Guid id) => await _dbContext.Companies.FirstOrDefaultAsync(c => c.Id == id);
+        public async Task<Company> GetCompanyByIdAsync(Guid id) => await _dbContext.Companies.FirstOrDefaultAsync(x => x.Id == id);
+
+        public async Task<Company> GetCompanyByCodeAsync(string code) => await _dbContext.Companies.FirstOrDefaultAsync(x => x.Code.ToLower() == code.ToLower());
     }
 }

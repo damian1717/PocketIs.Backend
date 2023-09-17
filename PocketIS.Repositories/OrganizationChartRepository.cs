@@ -19,7 +19,7 @@ namespace PocketIS.Repositories
 
         public async Task<OrganizationChartPerson> GetListOfPersonAsync(Guid id) => await _dbContext.OrganizationChartPersons.FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<List<OrganizationChartPerson>> GetListOfPersonsAsync() => await _dbContext.OrganizationChartPersons.ToListAsync();
+        public async Task<List<OrganizationChartPerson>> GetListOfPersonsAsync(Guid companyId) => await _dbContext.OrganizationChartPersons.Where(x => x.CompanyId == companyId).ToListAsync();
 
         public async Task AddOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson)
         {
@@ -29,8 +29,19 @@ namespace PocketIS.Repositories
 
         public async Task UpdateOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson)
         {
-            _dbContext.OrganizationChartPersons.Update(organizationChartPerson);
-            await _dbContext.SaveChangesAsync();
+            var currentChart = _dbContext.OrganizationChartPersons.Find(organizationChartPerson.Id);
+
+            if (currentChart is not null)
+            {
+                currentChart.Name = organizationChartPerson.Name;
+                currentChart.Position = organizationChartPerson.Position;
+                currentChart.LastName = organizationChartPerson.LastName;
+                currentChart.Level = organizationChartPerson.Level;
+                currentChart.BelowPersonId = organizationChartPerson.BelowPersonId;
+
+                _dbContext.OrganizationChartPersons.Update(organizationChartPerson);
+                await _dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteOrganizationChartPersonAsync(Guid id)

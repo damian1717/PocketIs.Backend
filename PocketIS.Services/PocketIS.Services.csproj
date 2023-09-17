@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PocketIS.Common\PocketIS.Common.csproj" />
     <ProjectReference Include="..\PocketIS.Infrastucture\PocketIS.Infrastucture.csproj" />
     <ProjectReference Include="..\PocketIS.Repositories.Interfaces\PocketIS.Repositories.Interfaces.csproj" />
     <ProjectReference Include="..\PocketIS.Services.Interfaces\PocketIS.Services.Interfaces.csproj" />

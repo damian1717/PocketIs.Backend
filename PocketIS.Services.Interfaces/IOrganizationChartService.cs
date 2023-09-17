@@ -10,7 +10,7 @@ namespace PocketIS.Services.Interfaces
     {
         Task AddOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson);
         Task UpdateOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson);
-        Task<List<OrganizationChartPersonModel>> GetListOfPersonsAsync();
+        Task<List<OrganizationChartPersonModel>> GetListOfPersonsAsync(Guid companyId);
         Task<OrganizationChartPerson> GetListOfPersonAsync(Guid id);
         Task DeleteOrganizationChartPersonAsync(Guid id);
         Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id);

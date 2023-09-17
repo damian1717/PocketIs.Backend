@@ -6,6 +6,6 @@ namespace PocketIS.Services.Interfaces
 {
     public interface IClaimsProviderService
     {
-        Task<IDictionary<string, string>> GetAsync(Guid userId);
+        Task<IDictionary<string, string>> GetAsync(Guid userId, Guid companyId);
     }
 }
