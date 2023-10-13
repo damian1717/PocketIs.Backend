@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OrgChart;
 using PocketIS.Domain;
 using PocketIS.Models.Regulation;
 using PocketIS.Services.Interfaces;
+using System.Drawing;
 
 namespace PocketIS.Controllers
 {
@@ -46,7 +48,8 @@ namespace PocketIS.Controllers
                 Name = model.Name,
                 Link = model.Link,
                 Description = model.Description,
-                InsertedDate = DateTime.Now
+                InsertedDate = DateTime.Now,
+                CompanyId = CompanyId
             };
 
             await _regulationService.UpdateRegulationAsync(regulation);

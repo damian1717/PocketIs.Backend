@@ -54,7 +54,8 @@ namespace PocketIS.Services
                 LastName = user.LastName,
                 Email = user.Email,
                 Role = user.Role,
-                CompanyId = user.CompanyId
+                CompanyId = user.CompanyId,
+                CompanyName = user.Company?.Name ?? string.Empty
             };
         }
 

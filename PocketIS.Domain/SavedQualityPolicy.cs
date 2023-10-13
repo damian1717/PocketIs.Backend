@@ -1,12 +1,11 @@
 ﻿namespace PocketIS.Domain
 {
-    public class Document : BaseEntity<Guid>
+    public class SavedQualityPolicy : BaseEntity<Guid>
     {
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public byte[] FileData { get; set; }
         public int Version { get; set; }
         public Guid CompanyId { get; set; }
         public Company Company { get; set; } = null!;
+        public Guid QualityPolicyId { get; set; }
+        public virtual QualityPolicy QualityPolicy { get; set; } = null!;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace PocketIS.Models.Report
 {
-    public class QualityPolicyReportModel
+    public class QualityPolicyReportModel : BaseReportModel
     {
         public QualityPolicyModel[] QualityPolicies { get; set; }
     }

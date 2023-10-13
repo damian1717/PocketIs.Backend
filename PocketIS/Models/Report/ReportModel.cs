@@ -7,14 +7,14 @@ namespace PocketIS.Models.Report
     {
         
         private readonly QualityPolicyReportModel _reportData;
-        private readonly User _user;
+        private readonly UserInfo _user;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="reportData">Report data</param>
         /// <param name="user">User Info</param>
-        public ReportModel(QualityPolicyReportModel reportData, User user)
+        public ReportModel(QualityPolicyReportModel reportData, UserInfo user)
         {
             _reportData = reportData;
             _user = user;
@@ -24,7 +24,7 @@ namespace PocketIS.Models.Report
 
         public IEnumerable<ReportSubReportModel<QualityPolicyReportModel>> GetSubReports()
         {
-            yield return new ReportSubReportModel<QualityPolicyReportModel> { Model = _reportData, User = _user, SubReport = "Components/_Content" };
+            yield return new ReportSubReportModel<QualityPolicyReportModel> { Model = _reportData, User = _user, SubReport = "Components/Content/_ContentQualityPolicy" };
         }
     }
 }

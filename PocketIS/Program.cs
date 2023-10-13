@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 using PocketIS.Application.Common.Authentication;
 using PocketIS.Application.Common.Mvc;
 using PocketIS.Application.Common.Swagger;
@@ -19,8 +20,9 @@ builder.Services.AddCors(options =>
                       {
                           policy.WithOrigins("http://localhost:4200")
                           .WithMethods("GET", "POST", "PUT", "DELETE")
-                          .AllowAnyHeader();
-                      });
+                          .AllowAnyHeader()
+                          .WithExposedHeaders(HeaderNames.AccessControlAllowOrigin, HeaderNames.ContentDisposition);
+    });
 });
 
 builder.Services.AddControllers();

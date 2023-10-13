@@ -45,5 +45,6 @@ namespace PocketIS.Domain
         public ICollection<Regulation> Regulations { get; } = new List<Regulation>();
         public ICollection<OrganizationChartPerson> OrganizationChartPersons { get; } = new List<OrganizationChartPerson>();
         public ICollection<Document> Documents { get; } = new List<Document>();
+        public ICollection<SavedQualityPolicy> SavedQualityPolicies { get; } = new List<SavedQualityPolicy>();
     }
 }

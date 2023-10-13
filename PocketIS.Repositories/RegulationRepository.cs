@@ -28,7 +28,7 @@ namespace PocketIS.Repositories
 
         public async Task UpdateRegulationAsync(Regulation regulation)
         {
-            var currentRegulation = _dbContext.Regulations.Find(regulation.Id);
+            var currentRegulation = await _dbContext.Regulations.AsNoTracking().FirstOrDefaultAsync(x => x.Id == regulation.Id);
 
             if (currentRegulation is not null)
             {

@@ -1,11 +1,13 @@
 ﻿@using PocketIS.Models
 
 @{
-    //var name = Model.Model.Name;
+    var name = Model.Model.ReportName;
+    var user = Model?.User;
+    var companyName = user?.CompanyName ?? string.Empty;
 }
 
 <div class="header">
-    <h1>Polityka Jakości</h1>
-    <h1>Nazwa firmy</h1>
+    <h1>@name</h1>
+    <h1>Firma: @companyName</h1>
     <div class="separator after"></div>
 </div>

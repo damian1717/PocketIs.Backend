@@ -1,5 +1,6 @@
 ﻿using PocketIS.Domain;
 using PocketIS.Domain.BusinessEntity;
+using PocketIS.Domain.ChartOrg;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -14,5 +15,6 @@ namespace PocketIS.Services.Interfaces
         Task<OrganizationChartPerson> GetListOfPersonAsync(Guid id);
         Task DeleteOrganizationChartPersonAsync(Guid id);
         Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id);
+        string GenerateOrganizationChartImage64String(ChartNode[] chartNodes);
     }
 }

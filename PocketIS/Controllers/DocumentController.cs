@@ -34,7 +34,7 @@ namespace PocketIS.Controllers
 
             if (document?.FileData is null) NotFound();
 
-            return File(document.FileData, Constants.PdfContentMime);
+            return File(document.FileData, Constants.PdfContentMime, document.Name);
         }
 
         [HttpPost]
