@@ -16,12 +16,21 @@ namespace PocketIS.Services
         }
         public async Task AddAsync(User user) => await _userRepository.AddAsync(user);
 
-        public async Task<List<UserInfo>> GetAllUsersAsync(Guid companyId)
+        public async Task<List<UserInfo>> GetAllUsersAsync(Guid companyId, bool isSuperAdmin)
         {
             var newUsers = new List<UserInfo>();
 
-            var users = await _userRepository.GetAllUsersAsync(companyId);
-            
+            List<User> users = null;
+
+            if (isSuperAdmin)
+            {
+                users = await _userRepository.GetAllUsersAsync();
+            }
+            else
+            {
+                users = await _userRepository.GetAllUsersAsync(companyId);
+            }
+                        
             if (users is null || users.Count == 0) return newUsers;
 
             foreach (var user in users)

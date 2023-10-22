@@ -9,6 +9,7 @@ namespace PocketIS.Repositories.Interfaces
     {
         Task<User> GetAsync(Guid id);
         Task<List<User>> GetAllUsersAsync(Guid companyId);
+        Task<List<User>> GetAllUsersAsync();
         Task<User> GetAsync(string email);
         Task AddAsync(User user);
         Task UpdateAsync(User user);

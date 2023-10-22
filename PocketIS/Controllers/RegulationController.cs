@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OrgChart;
 using PocketIS.Domain;
 using PocketIS.Models.Regulation;
 using PocketIS.Services.Interfaces;
-using System.Drawing;
 
 namespace PocketIS.Controllers
 {

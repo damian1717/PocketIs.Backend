@@ -9,7 +9,7 @@ namespace PocketIS.Services.Interfaces
     {
         Task<User> GetUserForIdentityAsync(Guid id);
         Task<UserInfo> GetAsync(Guid id);
-        Task<List<UserInfo>> GetAllUsersAsync(Guid companyId);
+        Task<List<UserInfo>> GetAllUsersAsync(Guid companyId, bool isSuperAdmin);
         Task<UserInfo> GetAsync(string email);
         Task<User> GetUserForIdentityAsync(string email);
         Task AddAsync(User user);

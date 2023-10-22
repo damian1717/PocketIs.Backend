@@ -25,8 +25,6 @@ namespace PocketIS.Repositories
                         select policy;
 
             return await query.ToListAsync();
-
-
         }
 
         public async Task<int> GetLastVersionAsync()

@@ -24,6 +24,8 @@ namespace PocketIS.Repositories
 
         public async Task<List<User>> GetAllUsersAsync(Guid companyId) => await _dbContext.Users.Where(x => x.CompanyId == companyId).ToListAsync();
 
+        public async Task<List<User>> GetAllUsersAsync() => await _dbContext.Users.ToListAsync();
+
         public async Task<User> GetAsync(Guid id) => await _dbContext.Users.Include(x => x.Company).FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<User> GetAsync(string email) => await _dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);

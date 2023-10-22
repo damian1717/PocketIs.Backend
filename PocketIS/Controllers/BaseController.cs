@@ -10,6 +10,9 @@ namespace PocketIS.Controllers
         protected bool IsAdmin
             => User.IsInRole("admin");
 
+        protected bool IsSuperAdmin
+            => User.IsInRole("su");
+
         protected Guid UserId
             => string.IsNullOrWhiteSpace(User?.Identity?.Name) ?
                 Guid.Empty :

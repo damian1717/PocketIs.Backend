@@ -63,7 +63,7 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("GetPersonOrganizationChart/{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _organizationChartService.GetListOfPersonAsync(id));
+        public async Task<IActionResult> Get(Guid id) => Ok(await _organizationChartService.GetPersonAsync(id));
 
         [HttpDelete]
         [Route("DeleteOrganizationChartPerson/{id}")]

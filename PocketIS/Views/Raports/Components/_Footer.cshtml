@@ -2,9 +2,10 @@
     var user = Model?.User;
     var firstName = user?.FirstName ?? string.Empty;
     var lastName = user?.LastName ?? string.Empty;
+    var name = Model.Model.ReportName;
 }
 
 <div class="footer">
     <div class="separator"></div>
-    <p>Polityka Jakości , z dn. 27.03.2023, wer. 1/2023, utworzył: @firstName @lastName, aktualizował: @firstName @lastName, zatwierdził: @firstName @lastName utworzona na licencji PocketISo</p>
+    <p>@name , z dn. 27.03.2023, wer. 1/2023, utworzył: @firstName @lastName, aktualizował: @firstName @lastName, zatwierdził: @firstName @lastName utworzona na licencji PocketISo</p>
 </div>

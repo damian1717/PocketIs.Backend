@@ -17,7 +17,7 @@ namespace PocketIS.Repositories
             _dbContext = dbContext;
         }
 
-        public async Task<OrganizationChartPerson> GetListOfPersonAsync(Guid id) => await _dbContext.OrganizationChartPersons.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<OrganizationChartPerson> GetPersonAsync(Guid id) => await _dbContext.OrganizationChartPersons.FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<List<OrganizationChartPerson>> GetListOfPersonsAsync(Guid companyId) => await _dbContext.OrganizationChartPersons.Where(x => x.CompanyId == companyId).ToListAsync();
 

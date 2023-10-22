@@ -27,7 +27,7 @@ namespace PocketIS.Controllers
 
         [HttpGet("GetUsers")]
         public async Task<ActionResult<User>> GetUsers()
-            => Ok(await _userService.GetAllUsersAsync(CompanyId));
+            => Ok(await _userService.GetAllUsersAsync(CompanyId, IsSuperAdmin));
 
         [HttpPost]
         [Route("updateuser")]

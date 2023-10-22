@@ -24,13 +24,14 @@ namespace PocketIS.Services
 
         public async Task AddOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson) => await _organizationChartRepository.AddOrganizationChartPersonAsync(organizationChartPerson);
 
-        public async Task<OrganizationChartPerson> GetListOfPersonAsync(Guid id) => await _organizationChartRepository.GetListOfPersonAsync(id);
+        public async Task<OrganizationChartPerson> GetPersonAsync(Guid id) => await _organizationChartRepository.GetPersonAsync(id);
 
         public async Task<List<OrganizationChartPersonModel>> GetListOfPersonsAsync(Guid companyId)
         {
             var newList = new List<OrganizationChartPersonModel>();
+            
             var organizationChartPersons = await _organizationChartRepository.GetListOfPersonsAsync(companyId);
-
+            
             var namesOfPersons = organizationChartPersons.ToDictionary(x => x.Id, z => $"{z.Name} {z.LastName}");
 
             foreach (var person in organizationChartPersons)
@@ -79,8 +80,8 @@ namespace PocketIS.Services
         {
             OrgChartOption defaultOption = new OrgChartOption
             {
-                BoxFillColor = ColorTranslator.FromHtml("#A7E7FC"),
-                BoxBorderColor = ColorTranslator.FromHtml("#A7E7FC"),
+                BoxFillColor = ColorTranslator.FromHtml("#4DB6AC"),
+                BoxBorderColor = ColorTranslator.FromHtml("#4DB6AC"),
                 ConnectLineColor = ColorTranslator.FromHtml("#424242")
             };
 
