@@ -36,7 +36,7 @@ namespace PocketIS.Repositories
                 currentRegulation.Description = regulation.Description;
                 currentRegulation.Name = regulation.Name;
 
-                _dbContext.Regulations.Update(regulation);
+                _dbContext.Regulations.Update(currentRegulation);
                 await _dbContext.SaveChangesAsync();
             }
         }

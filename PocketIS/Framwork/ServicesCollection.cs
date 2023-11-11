@@ -24,6 +24,7 @@ namespace PocketIS.Framwork
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddTransient<IOrganizationChartService, OrganizationChartService>();
             services.AddTransient<ISavedQualityPoliciesService, SavedQualityPoliciesService>();
+            services.AddTransient<IProcessService, ProcessService>();
 
             return services;
         }
@@ -38,6 +39,7 @@ namespace PocketIS.Framwork
             services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
             services.AddTransient<IOrganizationChartRepository, OrganizationChartRepository>();
             services.AddTransient<ISavedQualityPoliciesRepository, SavedQualityPoliciesRepository>();
+            services.AddTransient<IProcessRepository, ProcessRepository>();
 
             return services;
         }

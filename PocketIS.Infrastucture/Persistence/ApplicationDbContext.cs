@@ -19,6 +19,7 @@ namespace PocketIS.Infrastucture.Persistence
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<OrganizationChartPerson> OrganizationChartPersons { get; set; }
         public DbSet<SavedQualityPolicy> SavedQualityPolicies { get; set; }
+        public DbSet<Process> Processes { get; set; }
         public Task<int> SaveChangesAsync()
         {
             return base.SaveChangesAsync();
