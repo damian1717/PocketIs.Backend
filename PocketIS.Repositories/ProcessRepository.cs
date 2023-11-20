@@ -48,5 +48,10 @@ namespace PocketIS.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task<List<Process>> GetProcessesForSuperAdmin()
+        => await _dbContext.Processes
+            .Include(x => x.Company)
+            .ToListAsync();
     }
 }

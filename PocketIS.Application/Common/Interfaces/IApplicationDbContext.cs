@@ -14,6 +14,7 @@ namespace PocketIS.Application.Common.Interfaces
         DbSet<OrganizationChartPerson> OrganizationChartPersons { get; set; }
         DbSet<SavedQualityPolicy> SavedQualityPolicies { get; set; }
         DbSet<Process> Processes { get; set; }
+        DbSet<DefinitionOfProcess> DefinitionOfProcesses { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

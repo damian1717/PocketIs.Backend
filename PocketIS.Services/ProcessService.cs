@@ -23,6 +23,8 @@ namespace PocketIS.Services
 
         public async Task<List<Process>> GetProcessesAsync(Guid companyId) => await _processRepository.GetProcessesAsync(companyId);
 
+        public async Task<List<Process>> GetProcessesForSuperAdmin() => await _processRepository.GetProcessesForSuperAdmin();
+
         public async Task UpdateProcessAsync(Process process) => await _processRepository.UpdateProcessAsync(process);
     }
 }

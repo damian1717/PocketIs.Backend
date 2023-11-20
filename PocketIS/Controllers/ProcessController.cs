@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PocketIS.Domain;
 using PocketIS.Models.Process;
 using PocketIS.Services.Interfaces;
+using Process = PocketIS.Domain.Process;
 
 namespace PocketIS.Controllers
 {
@@ -55,6 +55,29 @@ namespace PocketIS.Controllers
         [HttpGet]
         [Route("getprocesses")]
         public async Task<IActionResult> Get() => Ok(await _processService.GetProcessesAsync(CompanyId));
+
+        [HttpGet]
+        [Route("getprocessesforsuperadmin")]
+        public async Task<IActionResult> GetProcessesForSuperAdmin()
+        {
+            var processes = await _processService.GetProcessesForSuperAdmin();
+
+            var processList = new List<Models.Process.Process>();
+
+            foreach (var process in processes)
+            {
+                var pro = new Models.Process.Process
+                {
+                    Id = process.Id,
+                    Name = process.Name,
+                    CompanyName = process.IsBaseProcess ? string.Empty : process.Company?.Name ?? string.Empty,
+                    IsBaseProcess = process.IsBaseProcess
+                };
+
+                processList.Add(pro);
+            }
+            return Ok(processList);
+        }
 
         [HttpGet]
         [Route("getbaseprocesses")]

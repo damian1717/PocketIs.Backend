@@ -11,6 +11,7 @@ namespace PocketIS.Repositories.Interfaces
         Task UpdateProcessAsync(Process process);
         Task<List<Process>> GetBaseProcessesAsync(Guid companyId);
         Task<List<Process>> GetProcessesAsync(Guid companyId);
+        Task<List<Process>> GetProcessesForSuperAdmin();
         Task<Process> GetProcessByIdAsync(Guid id);
     }
 }
