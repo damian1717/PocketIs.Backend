@@ -13,5 +13,6 @@ namespace PocketIS.Services.Interfaces
         Task<List<DefinitionOfProcess>> GetDefinitionOfProcessAsync(Guid processId);
         Task<DefinitionOfProcess> GetDefinitionOfProcessByIdAsync(Guid id);
         Task DeleteDefinitionOfProcessAsync(Guid id);
+        string GenerateDefinitionOfProcessImage64String(string processName);
     }
 }

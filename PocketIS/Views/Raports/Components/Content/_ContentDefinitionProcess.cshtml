@@ -1,0 +1,113 @@
+﻿@using System.Linq;
+@using PocketIS.Application.Common.Codes
+
+@model PocketIS.ReportGenerator.ReportSubReportModel<PocketIS.Models.Report.DefinitionProcess.DefinitionProcessModel>
+
+<div style="text-align: left;">
+    <img src="@Model?.Model?.Image64String" />
+</div>
+
+@{
+    var inputData = Model.Model.DefinitionOfProcesses.Where(x => x.Code == DefinitionOfProcessCodes.InputData).ToList();
+    var outputData = Model.Model.DefinitionOfProcesses.Where(x => x.Code == DefinitionOfProcessCodes.OutputData).ToList();
+    var measuredValuesData = Model.Model.DefinitionOfProcesses.Where(x => x.Code == DefinitionOfProcessCodes.MeasuredValuesData).ToList();
+    var materialData = Model.Model.DefinitionOfProcesses.Where(x => x.Code == DefinitionOfProcessCodes.MaterialData).ToList();
+    var resourceData = Model.Model.DefinitionOfProcesses.Where(x => x.Code == DefinitionOfProcessCodes.ResourceData).ToList();
+    var documentsData = Model.Model.DefinitionOfProcesses.Where(x => x.Code == DefinitionOfProcessCodes.DocumentsData).ToList();
+    var itemsData = Model.Model.DefinitionOfProcesses.Where(x => x.Code == DefinitionOfProcessCodes.ItemsData).ToList();
+}
+
+<div class="content" style="text-align: left; padding-top: 50px;">
+
+    <h3 style="margin:0">Dane wejściowe:</h3>
+    @if (inputData.Count > 0)
+    {
+        foreach(var data in inputData)
+        {
+            <p style="margin:0">- @data.Name</p>
+        }
+    }
+    else
+    {
+        <p style="margin:0">- Brak</p>
+    }
+
+    <h3 style="margin:0">Mierniki:</h3>
+    @if (measuredValuesData.Count > 0)
+    {
+        foreach(var data in measuredValuesData)
+        {
+            <p style="margin:0">- @data.Name</p>
+        }
+    }
+    else
+    {
+        <p style="margin:0">- Brak</p>
+    }
+
+    <h3 style="margin:0">Kto:</h3>
+    @if (resourceData.Count > 0)
+    {
+        foreach(var data in resourceData)
+        {
+            <p style="margin:0">- @data.Name</p>
+        }
+    }
+    else
+    {
+        <p style="margin:0">- Brak</p>
+    }
+
+    <h3 style="margin:0">Co:</h3>
+    @if (materialData.Count > 0)
+    {
+        foreach(var data in materialData)
+        {
+            <p style="margin:0">- @data.Name</p>
+        }
+    }
+    else
+    {
+        <p style="margin:0">- Brak</p>
+    }
+
+    <h3 style="margin:0">Czym:</h3>
+    @if (documentsData.Count > 0)
+    {
+        foreach(var data in documentsData)
+        {
+            <p style="margin:0">- @data.Name</p>
+        }
+    }
+    else
+    {
+        <p style="margin:0">- Brak</p>
+    }
+
+    <h3 style="margin:0">Cel procesu:</h3>
+    @if (itemsData.Count > 0)
+    {
+        foreach(var data in itemsData)
+        {
+            <p style="margin:0">- @data.Name</p>
+        }
+    }
+    else
+    {
+        <p style="margin:0">- Brak</p>
+    }
+
+    <h3 style="margin:0">Dane wyjściowe:</h3>
+    @if (outputData.Count > 0)
+    {
+        foreach(var data in outputData)
+        {
+            <p style="margin:0">- @data.Name</p>
+        }
+    }
+    else
+    {
+        <p style="margin:0">- Brak</p>
+    }
+
+</div>

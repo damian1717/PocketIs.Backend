@@ -38,6 +38,19 @@ namespace PocketIS.Controllers
         }
 
         [HttpPost]
+        [Route("DownloadPdfByCodeLastAdded")]
+        public async Task<IActionResult> DownloadPdfByCodeLastAdded(string code)
+        {
+            var documents = await _documentService.GetAllDocumentsByCodeAsync(code, CompanyId);
+
+            if (documents is null || documents.Count <= 0) return NotFound("Raport nie został jeszcze wygenerowany.");
+
+            var document = documents.OrderByDescending(x => x.Version).First();
+
+            return File(document.FileData, Constants.PdfContentMime, document.Name);
+        }
+
+        [HttpPost]
         [Route("upload")]
         public async Task<IActionResult> Upload()
         {

@@ -7,6 +7,7 @@ using PocketIS.Framwork;
 using PocketIS.Infrastucture.Validation;
 using PocketIS.Models.Report;
 using PocketIS.Models.Report.ChartOrg;
+using PocketIS.Models.Report.DefinitionProcess;
 using PocketIS.ReportGenerator;
 using PocketIS.Services.Interfaces;
 
@@ -21,12 +22,15 @@ namespace PocketIS.Controllers
         private readonly IRenderRazorToStringService _renderService;
         private readonly IUserService _userService;
         private readonly IOrganizationChartService _organizationChartService;
-        public RaportController(IDocumentService documentService, IRenderRazorToStringService renderService, IUserService userService, IOrganizationChartService organizationChartService)
+        private readonly IDefinitionOfProcessService _definitionOfProcessService;
+        public RaportController(IDocumentService documentService, IRenderRazorToStringService renderService, IUserService userService,
+            IOrganizationChartService organizationChartService, IDefinitionOfProcessService definitionOfProcessService)
         {
             Check.NotNull(_documentService = documentService, nameof(documentService));
             Check.NotNull(_renderService = renderService, nameof(renderService));
             Check.NotNull(_userService = userService, nameof(userService));
             Check.NotNull(_organizationChartService = organizationChartService, nameof(organizationChartService));
+            Check.NotNull(_definitionOfProcessService = definitionOfProcessService, nameof(definitionOfProcessService));
         }
 
         [HttpPost]
@@ -39,7 +43,9 @@ namespace PocketIS.Controllers
 
             var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
             model.ReportName = "Polityka Jakości";
-            string raportName = GetRaportNameForQualityPolicy(numberForRaport);
+            model.CreatedDate = DateTime.Today;
+            model.Version = numberForRaport;
+            string raportName = GenerateRaportName("Polityka_jakości_wersja", numberForRaport);
             return await GeneratePdfReportAsync(ReportViews.GetDefault(), new ReportModel(model, user), null, raportName, RaportCodes.QualityPolicy, numberForRaport);
         }
 
@@ -48,14 +54,36 @@ namespace PocketIS.Controllers
         public async Task<IActionResult> GenerateOrgChartRaportPdf(ChartOrgModel model)
         {
             var user = await _userService.GetAsync(UserId);
-
             var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.OrganizationChart, CompanyId);
 
             var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
             model.Image64String = _organizationChartService.GenerateOrganizationChartImage64String(model.ChartNodes);
             model.ReportName = "Schemat Organizacji";
-            string raportName = GetRaportNameForOrgChart(numberForRaport);
+            model.CreatedDate = DateTime.Today;
+            model.Version = numberForRaport;
+            string raportName = GenerateRaportName("Schemat_Organizacji_wersja", numberForRaport);
             return await GeneratePdfReportAsync(ReportViews.GetDefault(), new ChartOrgReportModel(model, user), null, raportName, RaportCodes.OrganizationChart, numberForRaport);
+        }
+
+        [HttpPost]
+        [Route("GenerateDefinitionProcessRaportPdf")]
+        public async Task<IActionResult> GenerateDefinitionProcessRaportPdf(DefinitionProcessModel model)
+        {
+            var user = await _userService.GetAsync(UserId);
+
+            var reportCode = $"{RaportCodes.DefinitionProcess}_{model.ProcessId}";
+
+            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(reportCode, CompanyId);
+
+            var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
+            model.Image64String = _definitionOfProcessService.GenerateDefinitionOfProcessImage64String(model.ProcessName);
+
+            model.DefinitionOfProcesses = await _definitionOfProcessService.GetDefinitionOfProcessAsync(model.ProcessId);
+            model.CreatedDate = DateTime.Today;
+            model.Version = numberForRaport;
+            model.ReportName = $"Karta Procesu {model.ProcessName}";
+            string raportName = GenerateRaportName($"Karta_Procesu_{model.ProcessName}_wersja", numberForRaport);
+            return await GeneratePdfReportAsync(ReportViews.GetDefault(), new DefinitionProcessReportModel(model, user), null, raportName, reportCode, numberForRaport);
         }
 
         /// <summary>   
@@ -86,18 +114,11 @@ namespace PocketIS.Controllers
             return File(content, Constants.PdfContentMime, raportName);
         }
 
-        private string GetRaportNameForQualityPolicy(int numberForRaport)
+        private string GenerateRaportName(string raportName, int numberForRaport)
         {
             var currentDate = DateTime.Now.ToString("dd-MM-yyyy");
-            var raportName = $"Polityka_jakości_wersja_{numberForRaport}_{currentDate}";
-            return raportName;
-        }
-
-        private string GetRaportNameForOrgChart(int numberForRaport)
-        {
-            var currentDate = DateTime.Now.ToString("dd-MM-yyyy");
-            var raportName = $"Schemat_Organizacji_wersja_{numberForRaport}_{currentDate}";
-            return raportName;
+            var name = $"{raportName}_{numberForRaport}_{currentDate}";
+            return name;
         }
     }
 }

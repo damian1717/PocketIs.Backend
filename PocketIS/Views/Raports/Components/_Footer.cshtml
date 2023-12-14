@@ -3,9 +3,11 @@
     var firstName = user?.FirstName ?? string.Empty;
     var lastName = user?.LastName ?? string.Empty;
     var name = Model.Model.ReportName;
+    var createdDate = Model.Model.CreatedDate.ToString("dd/MM/yyyy");
+    var version = Model.Model.Version;
 }
 
 <div class="footer">
     <div class="separator"></div>
-    <p>@name , z dn. 27.03.2023, wer. 1/2023, utworzył: @firstName @lastName, aktualizował: @firstName @lastName, zatwierdził: @firstName @lastName utworzona na licencji PocketISo</p>
+    <p>@name , z dn. @createdDate, wer. @version, utworzył: @firstName @lastName, aktualizował: @firstName @lastName, zatwierdził: @firstName @lastName utworzona na licencji PocketISo</p>
 </div>

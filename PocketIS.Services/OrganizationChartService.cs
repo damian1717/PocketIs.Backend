@@ -107,7 +107,7 @@ namespace PocketIS.Services
 
             var imageInByte = orgChartGenerator.Generate().ToArray();
             var string64file = Convert.ToBase64String(imageInByte);
-            return $"data:image/png;base64, {string64file}"; ;
+            return $"data:image/png;base64, {string64file}";
 
         }
 
