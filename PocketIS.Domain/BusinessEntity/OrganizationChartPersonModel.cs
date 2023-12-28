@@ -9,5 +9,6 @@
         public Guid? BelowPersonId { get; set; }
         public string BelowPersonName { get; set; }
         public int Level { get; set; }
+        public string Email { get; set; }
     }
 }

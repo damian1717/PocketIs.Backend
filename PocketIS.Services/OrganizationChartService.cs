@@ -52,7 +52,8 @@ namespace PocketIS.Services
                     LastName = person.LastName,
                     Position = person.Position,
                     BelowPersonName = belowPersonName,
-                    Level = person.Level
+                    Level = person.Level,
+                    Email = person.Email
                 };
                 newList.Add(item);
             }
@@ -110,6 +111,8 @@ namespace PocketIS.Services
             return $"data:image/png;base64, {string64file}";
 
         }
+
+        public async Task<int> GetMaxLevelAsync(Guid companyId) => await _organizationChartRepository.GetMaxLevelAsync(companyId);
 
         private List<OrgChartNode> GetOrgChartNodes(ChartNode[] chartNodes)
         {

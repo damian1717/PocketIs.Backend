@@ -29,7 +29,7 @@ namespace PocketIS.Repositories
 
         public async Task UpdateOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson)
         {
-            var currentChart = _dbContext.OrganizationChartPersons.Find(organizationChartPerson.Id);
+            var currentChart = _dbContext.OrganizationChartPersons.FirstOrDefault(x => x.Id == organizationChartPerson.Id);
 
             if (currentChart is not null)
             {
@@ -38,8 +38,9 @@ namespace PocketIS.Repositories
                 currentChart.LastName = organizationChartPerson.LastName;
                 currentChart.Level = organizationChartPerson.Level;
                 currentChart.BelowPersonId = organizationChartPerson.BelowPersonId;
+                currentChart.Email = organizationChartPerson.Email;
 
-                _dbContext.OrganizationChartPersons.Update(organizationChartPerson);
+                _dbContext.OrganizationChartPersons.Update(currentChart);
                 await _dbContext.SaveChangesAsync();
             }
         }
@@ -57,5 +58,12 @@ namespace PocketIS.Repositories
 
         public async Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id) => await _dbContext.OrganizationChartPersons.Where(x => x.BelowPersonId == id).ToListAsync();
 
+        public async Task<int> GetMaxLevelAsync(Guid companyId)
+        {
+            return await _dbContext.OrganizationChartPersons
+                        .Where(x => x.CompanyId == companyId)
+                        .MaxAsync(x => (int?)x.Level) 
+                        ?? 0;
+        }
     }
 }

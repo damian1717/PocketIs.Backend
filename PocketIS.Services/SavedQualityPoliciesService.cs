@@ -18,6 +18,6 @@ namespace PocketIS.Services
 
         public async Task<List<QualityPolicy>> GetSavedQualityPoliciesAsync(Guid companyId, int version) => await _savedQualityPoliciesRepository.GetSavedQualityPoliciesAsync(companyId, version);
 
-        public async Task<int> GetLastVersionAsync() => await _savedQualityPoliciesRepository.GetLastVersionAsync();
+        public async Task<int> GetLastVersionAsync(Guid companyId) => await _savedQualityPoliciesRepository.GetLastVersionAsync(companyId);
     }
 }

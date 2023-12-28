@@ -29,7 +29,8 @@ namespace PocketIS.Controllers
                 BelowPersonId = model.BelowPersonId,
                 InsertedDate = DateTime.Now,
                 Level = model.Level,
-                CompanyId = CompanyId
+                CompanyId = CompanyId,
+                Email = model.Email
             };
 
             await _organizationChartService.AddOrganizationChartPersonAsync(organizationChartPerson);
@@ -50,7 +51,8 @@ namespace PocketIS.Controllers
                 Position = model.Position,
                 BelowPersonId= model.BelowPersonId,
                 InsertedDate = DateTime.Now,
-                Level = model.Level
+                Level = model.Level,
+                Email = model.Email
             };
 
             await _organizationChartService.UpdateOrganizationChartPersonAsync(organizationChartPerson);
@@ -59,11 +61,13 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("GetPersonsListOrganizationChart")]
-        public async Task<IActionResult> Get() => Ok(await _organizationChartService.GetListOfPersonsAsync(CompanyId));
+        public async Task<IActionResult> Get() 
+            => Ok(await _organizationChartService.GetListOfPersonsAsync(CompanyId));
 
         [HttpGet]
         [Route("GetPersonOrganizationChart/{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _organizationChartService.GetPersonAsync(id));
+        public async Task<IActionResult> Get(Guid id) 
+            => Ok(await _organizationChartService.GetPersonAsync(id));
 
         [HttpDelete]
         [Route("DeleteOrganizationChartPerson/{id}")]
@@ -72,5 +76,10 @@ namespace PocketIS.Controllers
             await _organizationChartService.DeleteOrganizationChartPersonAsync(id);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("getorganizationchartmaxlevel")]
+        public async Task<IActionResult> GetOrganizationChartMaxLevel()
+            => Ok(await _organizationChartService.GetMaxLevelAsync(CompanyId));
     }
 }

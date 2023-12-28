@@ -9,6 +9,6 @@ namespace PocketIS.Repositories.Interfaces
     {
         Task<List<QualityPolicy>> GetSavedQualityPoliciesAsync(Guid companyId, int version);
         Task AddSavedQualityPolicyAsync(List<SavedQualityPolicy> items);
-        Task<int> GetLastVersionAsync();
+        Task<int> GetLastVersionAsync(Guid companyId);
     }
 }

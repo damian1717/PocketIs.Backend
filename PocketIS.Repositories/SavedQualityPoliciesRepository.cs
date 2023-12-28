@@ -27,9 +27,12 @@ namespace PocketIS.Repositories
             return await query.ToListAsync();
         }
 
-        public async Task<int> GetLastVersionAsync()
+        public async Task<int> GetLastVersionAsync(Guid companyId)
         {
-            return await _dbContext.SavedQualityPolicies.MaxAsync(x => (int?)x.Version) ?? 0;
+            return await _dbContext.SavedQualityPolicies
+                            .Where(x => x.CompanyId == companyId)
+                            .MaxAsync(x => (int?)x.Version)
+                            ?? 0;
         }
 
         public async Task AddSavedQualityPolicyAsync(List<SavedQualityPolicy> items)

@@ -21,6 +21,7 @@ namespace PocketIS.Infrastucture.Persistence
         public DbSet<SavedQualityPolicy> SavedQualityPolicies { get; set; }
         public DbSet<Process> Processes { get; set; }
         public DbSet<DefinitionOfProcess> DefinitionOfProcesses { get; set; }
+        public DbSet<Training> Trainings { get; set; }
         public Task<int> SaveChangesAsync()
         {
             return base.SaveChangesAsync();

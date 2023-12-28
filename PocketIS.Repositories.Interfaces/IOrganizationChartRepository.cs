@@ -13,5 +13,6 @@ namespace PocketIS.Repositories.Interfaces
         Task<OrganizationChartPerson> GetPersonAsync(Guid id);
         Task DeleteOrganizationChartPersonAsync(Guid id);
         Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id);
+        Task<int> GetMaxLevelAsync(Guid companyId);
     }
 }

@@ -21,7 +21,7 @@ namespace PocketIS.Controllers
         [Route("getlastsavedqualitypolicy")]
         public async Task<IActionResult> Get()
         {
-            var lastVersion = await _savedQualityPoliciesService.GetLastVersionAsync();
+            var lastVersion = await _savedQualityPoliciesService.GetLastVersionAsync(CompanyId);
 
             if (lastVersion.Equals(0)) return Ok();
 
@@ -34,7 +34,7 @@ namespace PocketIS.Controllers
         {
             if (model is null || model.Count <= 0) return BadRequest();
 
-            var lastVersion = await _savedQualityPoliciesService.GetLastVersionAsync();
+            var lastVersion = await _savedQualityPoliciesService.GetLastVersionAsync(CompanyId);
 
             var savedItems = new List<SavedQualityPolicy>();
             foreach(var item in model)

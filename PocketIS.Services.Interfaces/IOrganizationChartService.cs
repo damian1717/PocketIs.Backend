@@ -16,5 +16,6 @@ namespace PocketIS.Services.Interfaces
         Task DeleteOrganizationChartPersonAsync(Guid id);
         Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id);
         string GenerateOrganizationChartImage64String(ChartNode[] chartNodes);
+        Task<int> GetMaxLevelAsync(Guid companyId);
     }
 }
