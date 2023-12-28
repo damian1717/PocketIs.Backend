@@ -11,5 +11,6 @@ namespace PocketIS.Repositories.Interfaces
         Task<Training> GetTrainingByIdAsync(Guid id);
         Task AddTrainingAsync(Training training);
         Task UpdateTrainingAsync(Training training);
+        Task DeleteTrainingAsync(Guid id);
     }
 }

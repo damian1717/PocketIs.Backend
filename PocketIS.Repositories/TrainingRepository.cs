@@ -43,5 +43,16 @@ namespace PocketIS.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task DeleteTrainingAsync(Guid id)
+        {
+            var training = new Training()
+            {
+                Id = id
+            };
+
+            _dbContext.Trainings.Remove(training);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

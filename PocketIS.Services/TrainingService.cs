@@ -16,6 +16,8 @@ namespace PocketIS.Services
         }
         public async Task AddTrainingAsync(Training training) => await _trainingRepository.AddTrainingAsync(training);
 
+        public async Task DeleteTrainingAsync(Guid id) => await _trainingRepository.DeleteTrainingAsync(id);
+
         public async Task<Training> GetTrainingByIdAsync(Guid id) => await _trainingRepository.GetTrainingByIdAsync(id);
 
         public async Task<List<Training>> GetTrainingsAsync(Guid companyId) => await _trainingRepository.GetTrainingsAsync(companyId);

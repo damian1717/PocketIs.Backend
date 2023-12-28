@@ -61,5 +61,13 @@ namespace PocketIS.Controllers
         [HttpGet]
         [Route("gettraining/{id}")]
         public async Task<IActionResult> Get(Guid id) => Ok(await _trainingService.GetTrainingByIdAsync(id));
+
+        [HttpDelete]
+        [Route("deletetraining/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _trainingService.DeleteTrainingAsync(id);
+            return Ok();
+        }
     }
 }
