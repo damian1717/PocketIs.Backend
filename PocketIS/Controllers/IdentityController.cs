@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PocketIS.Domain;
 using PocketIS.Infrastucture.Attributes;
 using PocketIS.Models.Identity;
 using PocketIS.Services.Interfaces;
@@ -21,7 +20,8 @@ namespace PocketIS.Controllers
         [Authorize]
         [HttpGet("me")]
         [JwtAuth]
-        public IActionResult Get() => Content($"Your id: '{UserId:N}'.");
+        public IActionResult Get() 
+            => Content($"Your id: '{UserId:N}'.");
 
         [HttpPost("sign-up")]
         public async Task<IActionResult> SignUp(SignUpRequest request)

@@ -54,5 +54,10 @@ namespace PocketIS.Repositories
             _dbContext.Trainings.Remove(training);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<List<Training>> GetTrainingsForLevelAsync(Guid companyId, int level)
+            => await _dbContext.Trainings
+                .Where(x => x.CompanyId == companyId
+                && x.Level == level).ToListAsync();
     }
 }

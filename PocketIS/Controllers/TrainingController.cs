@@ -19,7 +19,7 @@ namespace PocketIS.Controllers
 
         [HttpPost]
         [Route("addtraining")]
-        public async Task<IActionResult> AddProcess(AddTraining model)
+        public async Task<IActionResult> AddTraining(AddTraining model)
         {
             var training = new Training
             {
@@ -36,7 +36,7 @@ namespace PocketIS.Controllers
 
         [HttpPost]
         [Route("updatetraining")]
-        public async Task<IActionResult> UpdateProcess(UpdateTraining model)
+        public async Task<IActionResult> UpdateTraining(UpdateTraining model)
         {
             if (model?.Id is null) return BadRequest();
 
@@ -56,11 +56,18 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("gettrainings")]
-        public async Task<IActionResult> Get() => Ok(await _trainingService.GetTrainingsAsync(CompanyId));
+        public async Task<IActionResult> Get() 
+            => Ok(await _trainingService.GetTrainingsAsync(CompanyId));
+
+        [HttpGet]
+        [Route("gettrainingsforlevel/{level}")]
+        public async Task<IActionResult> GetTrainingsForLevel(int level) 
+            => Ok(await _trainingService.GetTrainingsForLevelAsync(CompanyId, level));
 
         [HttpGet]
         [Route("gettraining/{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _trainingService.GetTrainingByIdAsync(id));
+        public async Task<IActionResult> Get(Guid id) 
+            => Ok(await _trainingService.GetTrainingByIdAsync(id));
 
         [HttpDelete]
         [Route("deletetraining/{id}")]

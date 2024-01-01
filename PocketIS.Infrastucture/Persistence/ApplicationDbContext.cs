@@ -22,6 +22,8 @@ namespace PocketIS.Infrastucture.Persistence
         public DbSet<Process> Processes { get; set; }
         public DbSet<DefinitionOfProcess> DefinitionOfProcesses { get; set; }
         public DbSet<Training> Trainings { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<EmployeeTraining> EmployeeTrainings { get; set; }
         public Task<int> SaveChangesAsync()
         {
             return base.SaveChangesAsync();

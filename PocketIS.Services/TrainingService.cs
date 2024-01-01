@@ -14,14 +14,22 @@ namespace PocketIS.Services
         {
             _trainingRepository = trainingRepository;
         }
-        public async Task AddTrainingAsync(Training training) => await _trainingRepository.AddTrainingAsync(training);
+        public async Task AddTrainingAsync(Training training) 
+            => await _trainingRepository.AddTrainingAsync(training);
 
-        public async Task DeleteTrainingAsync(Guid id) => await _trainingRepository.DeleteTrainingAsync(id);
+        public async Task DeleteTrainingAsync(Guid id) 
+            => await _trainingRepository.DeleteTrainingAsync(id);
 
-        public async Task<Training> GetTrainingByIdAsync(Guid id) => await _trainingRepository.GetTrainingByIdAsync(id);
+        public async Task<Training> GetTrainingByIdAsync(Guid id) 
+            => await _trainingRepository.GetTrainingByIdAsync(id);
 
-        public async Task<List<Training>> GetTrainingsAsync(Guid companyId) => await _trainingRepository.GetTrainingsAsync(companyId);
+        public async Task<List<Training>> GetTrainingsAsync(Guid companyId) 
+            => await _trainingRepository.GetTrainingsAsync(companyId);
 
-        public async Task UpdateTrainingAsync(Training training) => await _trainingRepository.UpdateTrainingAsync(training);
+        public async Task<List<Training>> GetTrainingsForLevelAsync(Guid companyId, int level) 
+            => await _trainingRepository.GetTrainingsForLevelAsync(companyId, level);
+
+        public async Task UpdateTrainingAsync(Training training) 
+            => await _trainingRepository.UpdateTrainingAsync(training);
     }
 }

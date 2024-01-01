@@ -56,10 +56,12 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("getregulations")]
-        public async Task<IActionResult> Get() => Ok(await _regulationService.GetRegulationsAsync(CompanyId));
+        public async Task<IActionResult> Get() 
+            => Ok(await _regulationService.GetRegulationsAsync(CompanyId));
 
         [HttpGet]
         [Route("getregulation/{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _regulationService.GetRegulationByIdAsync(id));
+        public async Task<IActionResult> Get(Guid id) 
+            => Ok(await _regulationService.GetRegulationByIdAsync(id));
     }
 }

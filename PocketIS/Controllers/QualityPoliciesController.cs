@@ -55,10 +55,12 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("getqualitypolicies")]
-        public async Task<IActionResult> Get() => Ok(await _qualityPoliciesService.GetQualityPoliciesAsync(CompanyId));
+        public async Task<IActionResult> Get() 
+            => Ok(await _qualityPoliciesService.GetQualityPoliciesAsync(CompanyId));
 
         [HttpGet]
         [Route("getqualitypolicy/{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _qualityPoliciesService.GetQualityPolicyAsync(id));
+        public async Task<IActionResult> Get(Guid id) 
+            => Ok(await _qualityPoliciesService.GetQualityPolicyAsync(id));
     }
 }

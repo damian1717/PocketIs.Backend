@@ -54,7 +54,8 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("getprocesses")]
-        public async Task<IActionResult> Get() => Ok(await _processService.GetProcessesAsync(CompanyId));
+        public async Task<IActionResult> Get() 
+            => Ok(await _processService.GetProcessesAsync(CompanyId));
 
         [HttpGet]
         [Route("getprocessesforsuperadmin")]
@@ -81,10 +82,12 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("getbaseprocesses")]
-        public async Task<IActionResult> GetBaseProcesses() => Ok(await _processService.GetBaseProcessesAsync(CompanyId));
+        public async Task<IActionResult> GetBaseProcesses() 
+            => Ok(await _processService.GetBaseProcessesAsync(CompanyId));
 
         [HttpGet]
         [Route("getprocess/{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _processService.GetProcessByIdAsync(id));
+        public async Task<IActionResult> Get(Guid id) 
+            => Ok(await _processService.GetProcessByIdAsync(id));
     }
 }

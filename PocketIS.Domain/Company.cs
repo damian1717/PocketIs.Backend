@@ -48,5 +48,7 @@ namespace PocketIS.Domain
         public ICollection<SavedQualityPolicy> SavedQualityPolicies { get; } = new List<SavedQualityPolicy>();
         public ICollection<Process> Processes { get; } = new List<Process>();
         public ICollection<Training> Trainings { get; } = new List<Training>();
+        public ICollection<Employee> EmployeeForTrainings { get; } = new List<Employee>();
+        public ICollection<EmployeeTraining> EmployeeTrainings { get; } = new List<EmployeeTraining>();
     }
 }

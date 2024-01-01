@@ -20,11 +20,13 @@ namespace PocketIS.Controllers
 
         [HttpGet]
         [Route("GetDocumentsByCode")]
-        public async Task<IActionResult> Get(string code) => Ok(await _documentService.GetAllDocumentsByCodeAsync(code, CompanyId));
+        public async Task<IActionResult> Get(string code) 
+            => Ok(await _documentService.GetAllDocumentsByCodeAsync(code, CompanyId));
 
         [HttpGet]
         [Route("GetDocument")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _documentService.GetDocumnetAsync(id));
+        public async Task<IActionResult> Get(Guid id) 
+            => Ok(await _documentService.GetDocumnetAsync(id));
 
         [HttpPost]
         [Route("DownloadPdf")]
