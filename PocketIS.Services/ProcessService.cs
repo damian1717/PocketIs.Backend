@@ -15,16 +15,22 @@ namespace PocketIS.Services
             _processRepository = processRepository;
         }
 
-        public async Task AddProcessAsync(Process process) => await _processRepository.AddProcessAsync(process);
+        public async Task AddProcessAsync(Process process) 
+            => await _processRepository.AddProcessAsync(process);
 
-        public async Task<List<Process>> GetBaseProcessesAsync(Guid companyId) => await _processRepository.GetBaseProcessesAsync(companyId);
+        public async Task<List<Process>> GetBaseProcessesAsync() 
+            => await _processRepository.GetBaseProcessesAsync();
 
-        public async Task<Process> GetProcessByIdAsync(Guid id) => await _processRepository.GetProcessByIdAsync(id);
+        public async Task<Process> GetProcessByIdAsync(Guid id) 
+            => await _processRepository.GetProcessByIdAsync(id);
 
-        public async Task<List<Process>> GetProcessesAsync(Guid companyId) => await _processRepository.GetProcessesAsync(companyId);
+        public async Task<List<Process>> GetProcessesAsync() 
+            => await _processRepository.GetProcessesAsync();
 
-        public async Task<List<Process>> GetProcessesForSuperAdmin() => await _processRepository.GetProcessesForSuperAdmin();
+        public async Task<List<Process>> GetProcessesForSuperAdmin() 
+            => await _processRepository.GetProcessesForSuperAdmin();
 
-        public async Task UpdateProcessAsync(Process process) => await _processRepository.UpdateProcessAsync(process);
+        public async Task UpdateProcessAsync(Process process) 
+            => await _processRepository.UpdateProcessAsync(process);
     }
 }

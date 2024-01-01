@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PocketIS.Application.Common.Interfaces;
 using PocketIS.Domain;
+using PocketIS.Infrastucture.Persistence;
 using PocketIS.Repositories;
 using PocketIS.Repositories.Interfaces;
 using PocketIS.Services;
@@ -29,6 +31,8 @@ namespace PocketIS.Framwork
             services.AddTransient<ITrainingService, TrainingService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IEmployeeTrainingService, EmployeeTrainingService>();
+            services.AddHttpContextAccessor();
+            services.AddScoped<IUserProvider, UserProvider>();
 
             return services;
         }

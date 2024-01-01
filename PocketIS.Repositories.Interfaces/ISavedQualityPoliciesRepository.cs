@@ -7,8 +7,8 @@ namespace PocketIS.Repositories.Interfaces
 {
     public interface ISavedQualityPoliciesRepository
     {
-        Task<List<QualityPolicy>> GetSavedQualityPoliciesAsync(Guid companyId, int version);
+        Task<List<QualityPolicy>> GetSavedQualityPoliciesAsync(int version);
         Task AddSavedQualityPolicyAsync(List<SavedQualityPolicy> items);
-        Task<int> GetLastVersionAsync(Guid companyId);
+        Task<int> GetLastVersionAsync();
     }
 }

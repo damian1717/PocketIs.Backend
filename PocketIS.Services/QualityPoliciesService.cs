@@ -16,12 +16,16 @@ namespace PocketIS.Services
             _qualityPoliciesRepository = qualityPoliciesRepository;
         }
 
-        public async Task<QualityPolicy> GetQualityPolicyAsync(Guid id) => await _qualityPoliciesRepository.GetQualityPolicyAsync(id);
+        public async Task<QualityPolicy> GetQualityPolicyAsync(Guid id) 
+            => await _qualityPoliciesRepository.GetQualityPolicyAsync(id);
 
-        public async Task<List<QualityPolicy>> GetQualityPoliciesAsync(Guid companyId) => await _qualityPoliciesRepository.GetQualityPoliciesAsync(companyId);
+        public async Task<List<QualityPolicy>> GetQualityPoliciesAsync() 
+            => await _qualityPoliciesRepository.GetQualityPoliciesAsync();
 
-        public async Task AddQualityPolicyAsync(QualityPolicy qualityPolicy) => await _qualityPoliciesRepository.AddQualityPolicyAsync(qualityPolicy);
+        public async Task AddQualityPolicyAsync(QualityPolicy qualityPolicy) 
+            => await _qualityPoliciesRepository.AddQualityPolicyAsync(qualityPolicy);
 
-        public async Task UpdateQualityPolicyAsync(QualityPolicy qualityPolicy) => await _qualityPoliciesRepository.UpdateQualityPolicyAsync(qualityPolicy);
+        public async Task UpdateQualityPolicyAsync(QualityPolicy qualityPolicy) 
+            => await _qualityPoliciesRepository.UpdateQualityPolicyAsync(qualityPolicy);
     }
 }

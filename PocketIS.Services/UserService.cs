@@ -14,9 +14,11 @@ namespace PocketIS.Services
         {
             _userRepository = userRepository;
         }
-        public async Task AddAsync(User user) => await _userRepository.AddAsync(user);
 
-        public async Task<List<UserInfo>> GetAllUsersAsync(Guid companyId, bool isSuperAdmin)
+        public async Task AddAsync(User user) 
+            => await _userRepository.AddAsync(user);
+
+        public async Task<List<UserInfo>> GetAllUsersAsync(bool isSuperAdmin)
         {
             var newUsers = new List<UserInfo>();
 
@@ -28,7 +30,7 @@ namespace PocketIS.Services
             }
             else
             {
-                users = await _userRepository.GetAllUsersAsync(companyId);
+                users = await _userRepository.GetAllUsersForCompanyAsync();
             }
                         
             if (users is null || users.Count == 0) return newUsers;
@@ -85,12 +87,16 @@ namespace PocketIS.Services
             };
         }
 
-        public async Task UpdateAsync(User user) => await _userRepository.UpdateAsync(user);
+        public async Task UpdateAsync(User user) 
+            => await _userRepository.UpdateAsync(user);
 
-        public async Task DeleteAsync(Guid id) => await _userRepository.DeleteAsync(id);
+        public async Task DeleteAsync(Guid id) 
+            => await _userRepository.DeleteAsync(id);
 
-        public async Task<User> GetUserForIdentityAsync(Guid id) => await _userRepository.GetAsync(id);
+        public async Task<User> GetUserForIdentityAsync(Guid id) 
+            => await _userRepository.GetAsync(id);
 
-        public async Task<User> GetUserForIdentityAsync(string email) => await _userRepository.GetAsync(email);
+        public async Task<User> GetUserForIdentityAsync(string email) 
+            => await _userRepository.GetAsync(email);
     }
 }

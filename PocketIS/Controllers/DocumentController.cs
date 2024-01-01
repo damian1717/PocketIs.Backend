@@ -21,7 +21,7 @@ namespace PocketIS.Controllers
         [HttpGet]
         [Route("GetDocumentsByCode")]
         public async Task<IActionResult> Get(string code) 
-            => Ok(await _documentService.GetAllDocumentsByCodeAsync(code, CompanyId));
+            => Ok(await _documentService.GetAllDocumentsByCodeAsync(code));
 
         [HttpGet]
         [Route("GetDocument")]
@@ -43,7 +43,7 @@ namespace PocketIS.Controllers
         [Route("DownloadPdfByCodeLastAdded")]
         public async Task<IActionResult> DownloadPdfByCodeLastAdded(string code)
         {
-            var documents = await _documentService.GetAllDocumentsByCodeAsync(code, CompanyId);
+            var documents = await _documentService.GetAllDocumentsByCodeAsync(code);
 
             if (documents is null || documents.Count <= 0) return NotFound("Raport nie został jeszcze wygenerowany.");
 
@@ -83,7 +83,7 @@ namespace PocketIS.Controllers
 
         private async Task<string> GetRaportNameAsync()
         {
-            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.OrganizationChart, CompanyId);
+            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.OrganizationChart);
 
             var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
             var currentDate = DateTime.Now.ToString("dd-MM-yyyy");

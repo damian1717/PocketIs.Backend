@@ -7,7 +7,7 @@ namespace PocketIS.Repositories.Interfaces
 {
     public interface IEmployeeTrainingRepository
     {
-        Task<List<EmployeeTraining>> GetEmployeeTrainingsAsync(Guid companyId, Guid employeeId);
+        Task<List<EmployeeTraining>> GetEmployeeTrainingsAsync(Guid employeeId);
         Task<EmployeeTraining> GetEmployeeTrainingByIdAsync(Guid id);
         Task AddEmployeeTrainingAsync(EmployeeTraining employeeTraining);
         Task UpdateEmployeeTrainingAsync(EmployeeTraining employeeTraining);

@@ -22,15 +22,17 @@ namespace PocketIS.Services
             _organizationChartRepository = organizationChartRepository;
         }
 
-        public async Task AddOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson) => await _organizationChartRepository.AddOrganizationChartPersonAsync(organizationChartPerson);
+        public async Task AddOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson) 
+            => await _organizationChartRepository.AddOrganizationChartPersonAsync(organizationChartPerson);
 
-        public async Task<OrganizationChartPerson> GetPersonAsync(Guid id) => await _organizationChartRepository.GetPersonAsync(id);
+        public async Task<OrganizationChartPerson> GetPersonAsync(Guid id) 
+            => await _organizationChartRepository.GetPersonAsync(id);
 
-        public async Task<List<OrganizationChartPersonModel>> GetListOfPersonsAsync(Guid companyId)
+        public async Task<List<OrganizationChartPersonModel>> GetListOfPersonsAsync()
         {
             var newList = new List<OrganizationChartPersonModel>();
             
-            var organizationChartPersons = await _organizationChartRepository.GetListOfPersonsAsync(companyId);
+            var organizationChartPersons = await _organizationChartRepository.GetListOfPersonsAsync();
             
             var namesOfPersons = organizationChartPersons.ToDictionary(x => x.Id, z => $"{z.Name} {z.LastName}");
 
@@ -61,7 +63,8 @@ namespace PocketIS.Services
             return newList;
         }
 
-        public async Task UpdateOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson) => await _organizationChartRepository.UpdateOrganizationChartPersonAsync(organizationChartPerson);
+        public async Task UpdateOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson) 
+            => await _organizationChartRepository.UpdateOrganizationChartPersonAsync(organizationChartPerson);
 
         public async Task DeleteOrganizationChartPersonAsync(Guid id)
         {
@@ -75,7 +78,8 @@ namespace PocketIS.Services
             await _organizationChartRepository.DeleteOrganizationChartPersonAsync(id);
         }
 
-        public async Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id) => await _organizationChartRepository.GetListOfPersonsBelowIdAsync(id);
+        public async Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id) 
+            => await _organizationChartRepository.GetListOfPersonsBelowIdAsync(id);
 
         public string GenerateOrganizationChartImage64String(ChartNode[] chartNodes)
         {
@@ -109,10 +113,10 @@ namespace PocketIS.Services
             var imageInByte = orgChartGenerator.Generate().ToArray();
             var string64file = Convert.ToBase64String(imageInByte);
             return $"data:image/png;base64, {string64file}";
-
         }
 
-        public async Task<int> GetMaxLevelAsync(Guid companyId) => await _organizationChartRepository.GetMaxLevelAsync(companyId);
+        public async Task<int> GetMaxLevelAsync() 
+            => await _organizationChartRepository.GetMaxLevelAsync();
 
         private List<OrgChartNode> GetOrgChartNodes(ChartNode[] chartNodes)
         {

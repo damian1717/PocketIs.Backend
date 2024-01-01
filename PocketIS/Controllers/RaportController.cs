@@ -39,7 +39,7 @@ namespace PocketIS.Controllers
         {
             var user = await _userService.GetAsync(UserId);
 
-            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.QualityPolicy, CompanyId);
+            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.QualityPolicy);
 
             var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
             model.ReportName = "Polityka Jakości";
@@ -54,7 +54,7 @@ namespace PocketIS.Controllers
         public async Task<IActionResult> GenerateOrgChartRaportPdf(ChartOrgModel model)
         {
             var user = await _userService.GetAsync(UserId);
-            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.OrganizationChart, CompanyId);
+            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.OrganizationChart);
 
             var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
             model.Image64String = _organizationChartService.GenerateOrganizationChartImage64String(model.ChartNodes);
@@ -73,7 +73,7 @@ namespace PocketIS.Controllers
 
             var reportCode = $"{RaportCodes.DefinitionProcess}_{model.ProcessId}";
 
-            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(reportCode, CompanyId);
+            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(reportCode);
 
             var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
             model.Image64String = _definitionOfProcessService.GenerateDefinitionOfProcessImage64String(model.ProcessName);

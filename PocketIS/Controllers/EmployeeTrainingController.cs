@@ -61,7 +61,7 @@ namespace PocketIS.Controllers
         [HttpGet]
         [Route("getemployeetrainings/{employeeId}/{level}")]
         public async Task<IActionResult> GetEmployeeTrainings(Guid employeeId, int level)
-            => Ok(await _employeeTrainingService.GetEmployeeTrainingsAsync(CompanyId, employeeId, level));
+            => Ok(await _employeeTrainingService.GetEmployeeTrainingsAsync(employeeId, level));
 
         [HttpGet]
         [Route("getemployeetrainingbyid/{id}")]

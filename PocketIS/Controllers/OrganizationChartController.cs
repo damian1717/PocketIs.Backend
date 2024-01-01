@@ -62,7 +62,7 @@ namespace PocketIS.Controllers
         [HttpGet]
         [Route("GetPersonsListOrganizationChart")]
         public async Task<IActionResult> Get() 
-            => Ok(await _organizationChartService.GetListOfPersonsAsync(CompanyId));
+            => Ok(await _organizationChartService.GetListOfPersonsAsync());
 
         [HttpGet]
         [Route("GetPersonOrganizationChart/{id}")]
@@ -80,6 +80,6 @@ namespace PocketIS.Controllers
         [HttpGet]
         [Route("getorganizationchartmaxlevel")]
         public async Task<IActionResult> GetOrganizationChartMaxLevel()
-            => Ok(await _organizationChartService.GetMaxLevelAsync(CompanyId));
+            => Ok(await _organizationChartService.GetMaxLevelAsync());
     }
 }

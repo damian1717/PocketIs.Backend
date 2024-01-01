@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
 {
-    public class ProcessRepository : IProcessRepository
+    public class ProcessRepository : BaseRepository, IProcessRepository
     {
         private readonly IApplicationDbContext _dbContext;
-        public ProcessRepository(IApplicationDbContext dbContext)
+        public ProcessRepository(IUserProvider userProvider, IApplicationDbContext dbContext)
+            :base(userProvider)
         {
             _dbContext = dbContext;
         }
@@ -23,18 +24,20 @@ namespace PocketIS.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Process> GetProcessByIdAsync(Guid id) => await _dbContext.Processes.FirstOrDefaultAsync(x => x.Id == id);
-
-        public async Task<List<Process>> GetBaseProcessesAsync(Guid companyId) 
+        public async Task<Process> GetProcessByIdAsync(Guid id) 
             => await _dbContext.Processes
-            .Where(x => x.CompanyId == companyId
-                     && x.IsBaseProcess)
-            .ToListAsync();
+                .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<List<Process>> GetProcessesAsync(Guid companyId) 
+        public async Task<List<Process>> GetBaseProcessesAsync() 
             => await _dbContext.Processes
-            .Where(x => x.CompanyId == companyId)
-            .ToListAsync();
+                .Where(x => x.CompanyId == CompanyId
+                            && x.IsBaseProcess)
+                .ToListAsync();
+
+        public async Task<List<Process>> GetProcessesAsync() 
+            => await _dbContext.Processes
+                .Where(x => x.CompanyId == CompanyId)
+                .ToListAsync();
 
         public async Task UpdateProcessAsync(Process process)
         {

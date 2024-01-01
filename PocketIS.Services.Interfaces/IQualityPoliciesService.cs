@@ -8,7 +8,7 @@ namespace PocketIS.Services.Interfaces
     public interface IQualityPoliciesService
     {
         Task<QualityPolicy> GetQualityPolicyAsync(Guid id);
-        Task<List<QualityPolicy>> GetQualityPoliciesAsync(Guid companyId);
+        Task<List<QualityPolicy>> GetQualityPoliciesAsync();
         Task AddQualityPolicyAsync(QualityPolicy qualityPolicy);
         Task UpdateQualityPolicyAsync(QualityPolicy qualityPolicy);
     }

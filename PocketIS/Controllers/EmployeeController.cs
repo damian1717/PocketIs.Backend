@@ -61,7 +61,7 @@ namespace PocketIS.Controllers
         [HttpGet]
         [Route("getemployees")]
         public async Task<IActionResult> Get() 
-            => Ok(await _employeeService.GetEmployeesAsync(CompanyId));
+            => Ok(await _employeeService.GetEmployeesAsync());
 
         [HttpGet]
         [Route("getemployee/{id}")]

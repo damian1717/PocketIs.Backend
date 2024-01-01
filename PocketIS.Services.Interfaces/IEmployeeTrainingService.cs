@@ -7,7 +7,7 @@ namespace PocketIS.Services.Interfaces
 {
     public interface IEmployeeTrainingService
     {
-        Task<List<EmployeeTrainingInfo>> GetEmployeeTrainingsAsync(Guid companyId, Guid employeeId, int level);
+        Task<List<EmployeeTrainingInfo>> GetEmployeeTrainingsAsync(Guid employeeId, int level);
         Task<EmployeeTraining> GetEmployeeTrainingByIdAsync(Guid id);
         Task AddEmployeeTrainingAsync(EmployeeTraining employeeTraining);
         Task UpdateEmployeeTrainingAsync(EmployeeTraining employeeTraining);

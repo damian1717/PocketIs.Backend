@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
         private readonly IApplicationDbContext _dbContext;
-        public UserRepository(IApplicationDbContext dbContext)
+        public UserRepository(IUserProvider userProvider, IApplicationDbContext dbContext)
+            :base(userProvider)
         {
             _dbContext = dbContext;
         }
@@ -22,13 +23,22 @@ namespace PocketIS.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<User>> GetAllUsersAsync(Guid companyId) => await _dbContext.Users.Where(x => x.CompanyId == companyId).ToListAsync();
+        public async Task<List<User>> GetAllUsersForCompanyAsync() 
+            => await _dbContext.Users
+                .Where(x => x.CompanyId == CompanyId)
+                .ToListAsync();
 
-        public async Task<List<User>> GetAllUsersAsync() => await _dbContext.Users.ToListAsync();
+        public async Task<List<User>> GetAllUsersAsync() 
+            => await _dbContext.Users.ToListAsync();
 
-        public async Task<User> GetAsync(Guid id) => await _dbContext.Users.Include(x => x.Company).FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<User> GetAsync(Guid id) 
+            => await _dbContext.Users
+                .Include(x => x.Company)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<User> GetAsync(string email) => await _dbContext.Users.FirstOrDefaultAsync(x => x.Email == email);
+        public async Task<User> GetAsync(string email) 
+            => await _dbContext.Users
+                .FirstOrDefaultAsync(x => x.Email == email);
 
         public async Task UpdateAsync(User user)
         {

@@ -9,7 +9,7 @@ namespace PocketIS.Repositories.Interfaces
     {
         Task AddRegulationAsync(Regulation regulation);
         Task UpdateRegulationAsync(Regulation regulation);
-        Task<List<Regulation>> GetRegulationsAsync(Guid companyId);
+        Task<List<Regulation>> GetRegulationsAsync();
         Task<Regulation> GetRegulationByIdAsync(Guid id);
     }
 }

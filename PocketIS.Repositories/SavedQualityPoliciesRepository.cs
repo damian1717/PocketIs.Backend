@@ -9,28 +9,29 @@ using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
 {
-    public class SavedQualityPoliciesRepository : ISavedQualityPoliciesRepository
+    public class SavedQualityPoliciesRepository : BaseRepository, ISavedQualityPoliciesRepository
     {
         private readonly IApplicationDbContext _dbContext;
-        public SavedQualityPoliciesRepository(IApplicationDbContext dbContext)
+        public SavedQualityPoliciesRepository(IUserProvider userProvider, IApplicationDbContext dbContext)
+            :base(userProvider)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<List<QualityPolicy>> GetSavedQualityPoliciesAsync(Guid companyId, int version)
+        public async Task<List<QualityPolicy>> GetSavedQualityPoliciesAsync(int version)
         {
 
             var query = from policy in _dbContext.QualityPolicies
-                        where policy.SavedQualityPolicies.Any(c => c.Version == version && c.CompanyId == companyId)
+                        where policy.SavedQualityPolicies.Any(c => c.Version == version && c.CompanyId == CompanyId)
                         select policy;
 
             return await query.ToListAsync();
         }
 
-        public async Task<int> GetLastVersionAsync(Guid companyId)
+        public async Task<int> GetLastVersionAsync()
         {
             return await _dbContext.SavedQualityPolicies
-                            .Where(x => x.CompanyId == companyId)
+                            .Where(x => x.CompanyId == CompanyId)
                             .MaxAsync(x => (int?)x.Version)
                             ?? 0;
         }

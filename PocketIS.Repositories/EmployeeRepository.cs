@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository : BaseRepository, IEmployeeRepository
     {
         private readonly IApplicationDbContext _dbContext;
-        public EmployeeRepository(IApplicationDbContext dbContext)
+        public EmployeeRepository(IUserProvider userProvider, IApplicationDbContext dbContext)
+            : base(userProvider)
         {
             _dbContext = dbContext;
         }
@@ -35,10 +36,13 @@ namespace PocketIS.Repositories
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(Guid id)
-            => await _dbContext.Employees.FirstOrDefaultAsync(x => x.Id == id);
+            => await _dbContext.Employees
+            .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<List<Employee>> GetEmployeesAsync(Guid companyId)
-            => await _dbContext.Employees.Where(x => x.CompanyId == companyId).ToListAsync();
+        public async Task<List<Employee>> GetEmployeesAsync()
+            => await _dbContext.Employees
+            .Where(x => x.CompanyId == CompanyId)
+            .ToListAsync();
 
         public async Task UpdateEmployeeAsync(Employee employees)
         {

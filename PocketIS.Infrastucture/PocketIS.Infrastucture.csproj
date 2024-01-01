@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PocketIS.Application\PocketIS.Application.csproj" />
+    <ProjectReference Include="..\PocketIS.Common\PocketIS.Common.csproj" />
   </ItemGroup>
 
 </Project>

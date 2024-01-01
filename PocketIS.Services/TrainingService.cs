@@ -23,11 +23,11 @@ namespace PocketIS.Services
         public async Task<Training> GetTrainingByIdAsync(Guid id) 
             => await _trainingRepository.GetTrainingByIdAsync(id);
 
-        public async Task<List<Training>> GetTrainingsAsync(Guid companyId) 
-            => await _trainingRepository.GetTrainingsAsync(companyId);
+        public async Task<List<Training>> GetTrainingsAsync() 
+            => await _trainingRepository.GetTrainingsAsync();
 
-        public async Task<List<Training>> GetTrainingsForLevelAsync(Guid companyId, int level) 
-            => await _trainingRepository.GetTrainingsForLevelAsync(companyId, level);
+        public async Task<List<Training>> GetTrainingsForLevelAsync(int level) 
+            => await _trainingRepository.GetTrainingsForLevelAsync(level);
 
         public async Task UpdateTrainingAsync(Training training) 
             => await _trainingRepository.UpdateTrainingAsync(training);

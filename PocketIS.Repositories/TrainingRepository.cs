@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
 {
-    public class TrainingRepository : ITrainingRepository
+    public class TrainingRepository : BaseRepository, ITrainingRepository
     {
         private readonly IApplicationDbContext _dbContext;
-        public TrainingRepository(IApplicationDbContext dbContext)
+        public TrainingRepository(IUserProvider userProvider, IApplicationDbContext dbContext)
+            : base(userProvider)
         {
             _dbContext = dbContext;
         }
@@ -26,8 +27,8 @@ namespace PocketIS.Repositories
         public async Task<Training> GetTrainingByIdAsync(Guid id)
             => await _dbContext.Trainings.FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<List<Training>> GetTrainingsAsync(Guid companyId)
-            => await _dbContext.Trainings.Where(x => x.CompanyId == companyId).ToListAsync();
+        public async Task<List<Training>> GetTrainingsAsync()
+            => await _dbContext.Trainings.Where(x => x.CompanyId == CompanyId).ToListAsync();
 
         public async Task UpdateTrainingAsync(Training training)
         {
@@ -55,9 +56,9 @@ namespace PocketIS.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<Training>> GetTrainingsForLevelAsync(Guid companyId, int level)
+        public async Task<List<Training>> GetTrainingsForLevelAsync(int level)
             => await _dbContext.Trainings
-                .Where(x => x.CompanyId == companyId
+                .Where(x => x.CompanyId == CompanyId
                 && x.Level == level).ToListAsync();
     }
 }

@@ -24,8 +24,8 @@ namespace PocketIS.Services
         public async Task<Employee> GetEmployeeByIdAsync(Guid id)
             => await _employeeRepository.GetEmployeeByIdAsync(id);
 
-        public async Task<List<Employee>> GetEmployeesAsync(Guid companyId)
-            => await _employeeRepository.GetEmployeesAsync(companyId);
+        public async Task<List<Employee>> GetEmployeesAsync()
+            => await _employeeRepository.GetEmployeesAsync();
 
         public async Task UpdateEmployeeAsync(Employee employees)
             => await _employeeRepository.UpdateEmployeeAsync(employees);

@@ -9,17 +9,23 @@ using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
 {
-    public class OrganizationChartRepository : IOrganizationChartRepository
+    public class OrganizationChartRepository : BaseRepository, IOrganizationChartRepository
     {
         private readonly IApplicationDbContext _dbContext;
-        public OrganizationChartRepository(IApplicationDbContext dbContext)
+        public OrganizationChartRepository(IUserProvider userProvider, IApplicationDbContext dbContext)
+            : base(userProvider)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<OrganizationChartPerson> GetPersonAsync(Guid id) => await _dbContext.OrganizationChartPersons.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<OrganizationChartPerson> GetPersonAsync(Guid id) 
+            => await _dbContext.OrganizationChartPersons
+            .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<List<OrganizationChartPerson>> GetListOfPersonsAsync(Guid companyId) => await _dbContext.OrganizationChartPersons.Where(x => x.CompanyId == companyId).ToListAsync();
+        public async Task<List<OrganizationChartPerson>> GetListOfPersonsAsync()
+            => await _dbContext.OrganizationChartPersons
+                        .Where(x => x.CompanyId == CompanyId)
+                        .ToListAsync();
 
         public async Task AddOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson)
         {
@@ -56,12 +62,16 @@ namespace PocketIS.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id) => await _dbContext.OrganizationChartPersons.Where(x => x.BelowPersonId == id).ToListAsync();
+        public async Task<List<OrganizationChartPerson>> GetListOfPersonsBelowIdAsync(Guid id) 
+            => await _dbContext.OrganizationChartPersons
+                .Where(x => x.BelowPersonId == id
+                && x.CompanyId == CompanyId)
+                .ToListAsync();
 
-        public async Task<int> GetMaxLevelAsync(Guid companyId)
+        public async Task<int> GetMaxLevelAsync()
         {
             return await _dbContext.OrganizationChartPersons
-                        .Where(x => x.CompanyId == companyId)
+                        .Where(x => x.CompanyId == CompanyId)
                         .MaxAsync(x => (int?)x.Level) 
                         ?? 0;
         }

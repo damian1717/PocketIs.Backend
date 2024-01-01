@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace PocketIS.Repositories
 {
-    public class RegulationRepository : IRegulationRepository
+    public class RegulationRepository : BaseRepository, IRegulationRepository
     {
         private readonly IApplicationDbContext _dbContext;
-        public RegulationRepository(IApplicationDbContext dbContext)
+        public RegulationRepository(IUserProvider userProvider, IApplicationDbContext dbContext)
+            : base(userProvider)
         {
             _dbContext = dbContext;
         }
@@ -22,9 +23,14 @@ namespace PocketIS.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Regulation> GetRegulationByIdAsync(Guid id) => await _dbContext.Regulations.FirstOrDefaultAsync(x => x.Id == id);
+        public async Task<Regulation> GetRegulationByIdAsync(Guid id) 
+            => await _dbContext.Regulations
+                .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<List<Regulation>> GetRegulationsAsync(Guid companyId) => await _dbContext.Regulations.Where(x => x.CompanyId == companyId).ToListAsync();
+        public async Task<List<Regulation>> GetRegulationsAsync() 
+            => await _dbContext.Regulations
+                .Where(x => x.CompanyId == CompanyId)
+                .ToListAsync();
 
         public async Task UpdateRegulationAsync(Regulation regulation)
         {
