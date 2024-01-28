@@ -7,5 +7,6 @@
         public DateTime TrainingDate { get; set; }
         public int SkillLevel { get; set; }
         public Guid EmployeeId { get; set; }
+        public string EmployeeType { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace PocketIS.Domain
+﻿namespace PocketIS.Domain.EmployeeTrainingModel
 {
     public class EmployeeTrainingInfo
     {

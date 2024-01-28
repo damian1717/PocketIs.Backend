@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PocketIS.Application.Common.Interfaces;
-using PocketIS.Domain;
+using PocketIS.Domain.EmployeeTrainingModel;
 using PocketIS.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -44,6 +44,11 @@ namespace PocketIS.Repositories
             => await _dbContext.EmployeeTrainings
             .Where(x => x.CompanyId == CompanyId
             && x.EmployeeId == employeeId)
+            .ToListAsync();
+
+        public async Task<List<EmployeeTraining>> GetEmployeeTrainingsAsync()
+        => await _dbContext.EmployeeTrainings
+            .Where(x => x.CompanyId == CompanyId)
             .ToListAsync();
 
         public async Task UpdateEmployeeTrainingAsync(EmployeeTraining employeeTraining)

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PocketIS.Domain;
+using PocketIS.Domain.EmployeeTrainingModel;
 
 namespace PocketIS.Application.Common.Interfaces
 {

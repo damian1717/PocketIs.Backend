@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PocketIS.Application.Common.Interfaces;
 using PocketIS.Domain;
+using PocketIS.Domain.EmployeeTrainingModel;
 
 namespace PocketIS.Infrastucture.Persistence
 {

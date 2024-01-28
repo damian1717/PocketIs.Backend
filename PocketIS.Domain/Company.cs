@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PocketIS.Domain.EmployeeTrainingModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PocketIS.Domain
 {

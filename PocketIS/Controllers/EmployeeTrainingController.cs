@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PocketIS.Domain;
+using PocketIS.Domain.EmployeeTrainingModel;
 using PocketIS.Models.EmployeeTraining;
 using PocketIS.Services.Interfaces;
 
@@ -29,7 +29,8 @@ namespace PocketIS.Controllers
                 SkillLevel = model.SkillLevel,
                 EmployeeId = model.EmployeeId,
                 InsertedDate = DateTime.Now,
-                CompanyId = CompanyId
+                CompanyId = CompanyId,
+                EmployeeType = model.EmployeeType
             };
 
             await _employeeTrainingService.AddEmployeeTrainingAsync(employeeTraining);
@@ -67,5 +68,10 @@ namespace PocketIS.Controllers
         [Route("getemployeetrainingbyid/{id}")]
         public async Task<IActionResult> GetEmployeeTrainingById(Guid id)
             => Ok(await _employeeTrainingService.GetEmployeeTrainingByIdAsync(id));
+
+        [HttpGet]
+        [Route("getallemployeetrainings")]
+        public async Task<IActionResult> GetAllEmployeeTrainings()
+            => Ok(await _employeeTrainingService.GetAllEmployeeTrainingsAsync());
     }
 }
