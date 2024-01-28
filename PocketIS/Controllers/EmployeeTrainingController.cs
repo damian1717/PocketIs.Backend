@@ -73,5 +73,10 @@ namespace PocketIS.Controllers
         [Route("getallemployeetrainings")]
         public async Task<IActionResult> GetAllEmployeeTrainings()
             => Ok(await _employeeTrainingService.GetAllEmployeeTrainingsAsync());
+
+        [HttpGet]
+        [Route("getlastmodifiedrecorddata")]
+        public async Task<IActionResult> GetLastModifiedRecordData()
+            => Ok(await _employeeTrainingService.GetLastModifiedRecordDataAsync());
     }
 }

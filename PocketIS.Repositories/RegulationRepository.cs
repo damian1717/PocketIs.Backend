@@ -19,6 +19,11 @@ namespace PocketIS.Repositories
         }
         public async Task AddRegulationAsync(Regulation regulation)
         {
+            regulation.InsertedDate = DateTime.Now;
+            regulation.InsertedUserId = UserId;
+            regulation.UpdatedDate = DateTime.Now;
+            regulation.UpdatedUserId = UserId;
+
             await _dbContext.Regulations.AddAsync(regulation);
             await _dbContext.SaveChangesAsync();
         }
@@ -41,6 +46,8 @@ namespace PocketIS.Repositories
                 currentRegulation.Link = regulation.Link;
                 currentRegulation.Description = regulation.Description;
                 currentRegulation.Name = regulation.Name;
+                currentRegulation.UpdatedDate = DateTime.Now;
+                currentRegulation.UpdatedUserId = UserId;
 
                 _dbContext.Regulations.Update(currentRegulation);
                 await _dbContext.SaveChangesAsync();

@@ -38,6 +38,14 @@ namespace PocketIS.Repositories
 
         public async Task AddSavedQualityPolicyAsync(List<SavedQualityPolicy> items)
         {
+            foreach (var item in items)
+            {
+                item.InsertedDate = DateTime.Now;
+                item.InsertedUserId = UserId;
+                item.UpdatedDate = DateTime.Now;
+                item.UpdatedUserId = UserId;
+            }
+            
             _dbContext.SavedQualityPolicies.AddRange(items);
             await _dbContext.SaveChangesAsync();
         }

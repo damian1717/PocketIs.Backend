@@ -20,6 +20,11 @@ namespace PocketIS.Repositories
 
         public async Task AddEmployeeTrainingAsync(EmployeeTraining employeeTraining)
         {
+            employeeTraining.InsertedDate = DateTime.Now;
+            employeeTraining.InsertedUserId = UserId;
+            employeeTraining.UpdatedDate = DateTime.Now;
+            employeeTraining.UpdatedUserId = UserId;
+
             await _dbContext.EmployeeTrainings.AddAsync(employeeTraining);
             await _dbContext.SaveChangesAsync();
         }
@@ -51,6 +56,13 @@ namespace PocketIS.Repositories
             .Where(x => x.CompanyId == CompanyId)
             .ToListAsync();
 
+        public async Task<EmployeeTraining> GetLastModifiedRecordAsync()
+        {
+            return await _dbContext.EmployeeTrainings
+                   .OrderByDescending(p => p.UpdatedDate)
+                   .FirstOrDefaultAsync();
+        }
+
         public async Task UpdateEmployeeTrainingAsync(EmployeeTraining employeeTraining)
         {
             var currentEmployeesTraining = await _dbContext.EmployeeTrainings.AsNoTracking().FirstOrDefaultAsync(x => x.Id == employeeTraining.Id);
@@ -60,6 +72,8 @@ namespace PocketIS.Repositories
                 currentEmployeesTraining.Required = employeeTraining.Required;
                 currentEmployeesTraining.TrainingDate = employeeTraining.TrainingDate;
                 currentEmployeesTraining.SkillLevel = employeeTraining.SkillLevel;
+                currentEmployeesTraining.UpdatedDate = DateTime.Now;
+                currentEmployeesTraining.UpdatedUserId = UserId;
 
                 _dbContext.EmployeeTrainings.Update(currentEmployeesTraining);
                 await _dbContext.SaveChangesAsync();

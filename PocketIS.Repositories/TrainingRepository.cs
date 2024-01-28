@@ -20,6 +20,11 @@ namespace PocketIS.Repositories
 
         public async Task AddTrainingAsync(Training training)
         {
+            training.InsertedDate = DateTime.Now;
+            training.InsertedUserId = UserId;
+            training.UpdatedDate = DateTime.Now;
+            training.UpdatedUserId = UserId;
+
             await _dbContext.Trainings.AddAsync(training);
             await _dbContext.SaveChangesAsync();
         }
@@ -39,6 +44,8 @@ namespace PocketIS.Repositories
                 currentTraining.Name = training.Name;
                 currentTraining.Level = training.Level;
                 currentTraining.ForHowManyMonths = training.ForHowManyMonths;
+                currentTraining.UpdatedDate = DateTime.Now;
+                currentTraining.UpdatedUserId = UserId;
 
                 _dbContext.Trainings.Update(currentTraining);
                 await _dbContext.SaveChangesAsync();
@@ -60,5 +67,12 @@ namespace PocketIS.Repositories
             => await _dbContext.Trainings
                 .Where(x => x.CompanyId == CompanyId
                 && x.Level == level).ToListAsync();
+
+        public async Task<Training> GetLastModifiedRecordAsync()
+        {
+            return await _dbContext.Trainings
+                   .OrderByDescending(p => p.UpdatedDate)
+                   .FirstOrDefaultAsync();
+        }
     }
 }

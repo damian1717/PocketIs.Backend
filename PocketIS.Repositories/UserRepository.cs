@@ -50,6 +50,7 @@ namespace PocketIS.Repositories
                 currentUser.LastName = user.LastName;
                 currentUser.Email = user.Email;
                 currentUser.Role = user.Role;
+                currentUser.UpdatedDate = DateTime.Now;
 
                 _dbContext.Users.Update(currentUser);
                 await _dbContext.SaveChangesAsync();

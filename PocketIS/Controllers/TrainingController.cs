@@ -76,5 +76,10 @@ namespace PocketIS.Controllers
             await _trainingService.DeleteTrainingAsync(id);
             return Ok();
         }
+
+        [HttpGet]
+        [Route("getlastmodifiedrecorddata")]
+        public async Task<IActionResult> GetLastModifiedRecordData()
+            => Ok(await _trainingService.GetLastModifiedRecordDataAsync());
     }
 }

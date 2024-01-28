@@ -13,5 +13,6 @@ namespace PocketIS.Services.Interfaces
         Task AddTrainingAsync(Training training);
         Task UpdateTrainingAsync(Training training);
         Task DeleteTrainingAsync(Guid id);
+        Task<LastModifiedRecordInfo> GetLastModifiedRecordDataAsync();
     }
 }

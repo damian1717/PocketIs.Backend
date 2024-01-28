@@ -20,6 +20,11 @@ namespace PocketIS.Repositories
 
         public async Task AddProcessAsync(Process process)
         {
+            process.InsertedDate = DateTime.Now;
+            process.InsertedUserId = UserId;
+            process.UpdatedDate = DateTime.Now;
+            process.UpdatedUserId = UserId;
+
             await _dbContext.Processes.AddAsync(process);
             await _dbContext.SaveChangesAsync();
         }
@@ -46,6 +51,8 @@ namespace PocketIS.Repositories
             if (currentProcess is not null)
             {
                 currentProcess.Name = process.Name;
+                currentProcess.UpdatedDate = DateTime.Now;
+                currentProcess.UpdatedUserId = UserId;
 
                 _dbContext.Processes.Update(currentProcess);
                 await _dbContext.SaveChangesAsync();

@@ -17,7 +17,7 @@ namespace PocketIS.Domain
         public string Role { get; set; }
         public string PasswordHash { get; private set; }
         public DateTime InsertedDate { get; private set; }
-        public DateTime UpdatedDate { get; private set; }
+        public DateTime UpdatedDate { get; set; }
         public Guid CompanyId { get; set; }
         public Company Company { get; set; } = null!;
 

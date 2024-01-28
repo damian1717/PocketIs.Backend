@@ -35,6 +35,11 @@ namespace PocketIS.Repositories
 
         public async Task<int> SaveDocumentAsync(Document document)
         {
+            document.InsertedDate = DateTime.Now;
+            document.InsertedUserId = UserId;
+            document.UpdatedDate = DateTime.Now;
+            document.UpdatedUserId = UserId;
+
             await _dbContext.Documents.AddAsync(document);
             return await _dbContext.SaveChangesAsync();
         }

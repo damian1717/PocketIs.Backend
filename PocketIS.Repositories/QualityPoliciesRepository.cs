@@ -28,6 +28,11 @@ namespace PocketIS.Repositories
                 .ToListAsync();
         public async Task AddQualityPolicyAsync(QualityPolicy qualityPolicy)
         {
+            qualityPolicy.InsertedDate = DateTime.Now;
+            qualityPolicy.InsertedUserId = UserId;
+            qualityPolicy.UpdatedDate = DateTime.Now;
+            qualityPolicy.UpdatedUserId = UserId;
+
             await _dbContext.QualityPolicies.AddAsync(qualityPolicy);
             await _dbContext.SaveChangesAsync();
         }
@@ -41,6 +46,8 @@ namespace PocketIS.Repositories
                 currentQualityPolicy.IsInternal = qualityPolicy.IsInternal;
                 currentQualityPolicy.IsExternal = qualityPolicy.IsExternal;
                 currentQualityPolicy.Name = qualityPolicy.Name;
+                currentQualityPolicy.UpdatedDate = DateTime.Now;
+                currentQualityPolicy.UpdatedUserId = UserId;
 
                 _dbContext.QualityPolicies.Update(currentQualityPolicy);
                 await _dbContext.SaveChangesAsync();

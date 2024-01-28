@@ -17,14 +17,16 @@ namespace PocketIS.Services
         private readonly ITrainingRepository _trainingRepository;
         private readonly IEmployeeService _employeeService;
         private readonly IOrganizationChartService _organizationChartService;
+        private readonly IUserService _userService;
 
         public EmployeeTrainingService(IEmployeeTrainingRepository employeeTrainingRepository, ITrainingRepository trainingRepository,
-            IEmployeeService employeeService, IOrganizationChartService organizationChartService)
+            IEmployeeService employeeService, IOrganizationChartService organizationChartService, IUserService userService)
         {
             _employeeTrainingRepository = employeeTrainingRepository;
             _trainingRepository = trainingRepository;
             _employeeService = employeeService;
             _organizationChartService = organizationChartService;
+            _userService = userService;
         }
         public async Task AddEmployeeTrainingAsync(EmployeeTraining employeeTraining)
             => await _employeeTrainingRepository.AddEmployeeTrainingAsync(employeeTraining);
@@ -204,6 +206,26 @@ namespace PocketIS.Services
                 }
 
             return employeeTrainingList;
+        }
+
+        public async Task<LastModifiedRecordInfo> GetLastModifiedRecordDataAsync()
+        {
+            var item = new LastModifiedRecordInfo();
+            var employeeTraining = await _employeeTrainingRepository.GetLastModifiedRecordAsync();
+
+            item.ModifiedDate = employeeTraining?.UpdatedDate ?? null;
+
+            if (employeeTraining is not null)
+            {
+                var user = await _userService.GetAsync(employeeTraining.UpdatedUserId ?? Guid.Empty);
+
+                if (user is not null)
+                {
+                    item.Name = $"{user.FirstName} {user.LastName}";
+                }
+            }
+
+            return item;
         }
 
         public async Task UpdateEmployeeTrainingAsync(EmployeeTraining employeeTraining)

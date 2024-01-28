@@ -20,6 +20,11 @@ namespace PocketIS.Repositories
 
         public async Task AddEmployeeAsync(Employee employees)
         {
+            employees.InsertedDate = DateTime.Now;
+            employees.InsertedUserId = UserId;
+            employees.UpdatedDate = DateTime.Now;
+            employees.UpdatedUserId = UserId;
+
             await _dbContext.Employees.AddAsync(employees);
             await _dbContext.SaveChangesAsync();
         }
@@ -55,6 +60,8 @@ namespace PocketIS.Repositories
                 currentEmployees.LastName = employees.LastName;
                 currentEmployees.Position = employees.Position;
                 currentEmployees.Email = employees.Email;
+                currentEmployees.UpdatedDate = DateTime.Now;
+                currentEmployees.UpdatedUserId = UserId;
 
                 _dbContext.Employees.Update(currentEmployees);
                 await _dbContext.SaveChangesAsync();

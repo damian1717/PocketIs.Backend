@@ -29,6 +29,11 @@ namespace PocketIS.Repositories
 
         public async Task AddOrganizationChartPersonAsync(OrganizationChartPerson organizationChartPerson)
         {
+            organizationChartPerson.InsertedDate = DateTime.Now;
+            organizationChartPerson.InsertedUserId = UserId;
+            organizationChartPerson.UpdatedDate = DateTime.Now;
+            organizationChartPerson.UpdatedUserId = UserId;
+
             await _dbContext.OrganizationChartPersons.AddAsync(organizationChartPerson);
             await _dbContext.SaveChangesAsync();
         }
@@ -45,6 +50,8 @@ namespace PocketIS.Repositories
                 currentChart.Level = organizationChartPerson.Level;
                 currentChart.BelowPersonId = organizationChartPerson.BelowPersonId;
                 currentChart.Email = organizationChartPerson.Email;
+                currentChart.UpdatedDate = DateTime.Now;
+                currentChart.UpdatedUserId = UserId;
 
                 _dbContext.OrganizationChartPersons.Update(currentChart);
                 await _dbContext.SaveChangesAsync();
