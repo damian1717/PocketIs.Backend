@@ -118,6 +118,37 @@ namespace PocketIS.Services
         public async Task<int> GetMaxLevelAsync() 
             => await _organizationChartRepository.GetMaxLevelAsync();
 
+        public async Task DeleteOrganizationChartPersonAndBelowPersonsAsync(Guid id)
+        {
+            var items = new List<OrganizationChartPerson>();
+
+            items.Add(
+                new OrganizationChartPerson
+                {
+                    Id = id
+                });
+
+            var allPersons = await GetListOfPersonsAsync();
+            GetBelowPersons(id, items, allPersons);
+
+            await _organizationChartRepository.DeleteOrganizationChartPersonAndBelowPersonsAsync(items);
+        }
+
+        private static void GetBelowPersons(Guid id, List<OrganizationChartPerson> items, List<OrganizationChartPersonModel> allPersons)
+        {
+            var allBelowPersons = allPersons.Where(x => x.BelowPersonId == id);
+            foreach (var person in allBelowPersons)
+            {
+                items.Add(
+                    new OrganizationChartPerson
+                    {
+                        Id = person.Id
+                    });
+
+                GetBelowPersons(person.Id, items, allPersons);
+            }
+        }
+
         private List<OrgChartNode> GetOrgChartNodes(ChartNode[] chartNodes)
         {
             List<OrgChartNode> nodes = new List<OrgChartNode>();

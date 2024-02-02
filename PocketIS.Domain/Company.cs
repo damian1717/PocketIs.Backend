@@ -41,6 +41,7 @@ namespace PocketIS.Domain
         public string? OpportunitiesForTheCompany { get; set; }
 
         public string? ThreatsToTheCompany { get; set; }
+        public bool IsArchive { get; set; }
         public ICollection<User> Users { get; } = new List<User>();
         public ICollection<QualityPolicy> QualityPolicies { get; } = new List<QualityPolicy>();
         public ICollection<Regulation> Regulations { get; } = new List<Regulation>();

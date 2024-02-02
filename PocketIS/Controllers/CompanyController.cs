@@ -41,6 +41,7 @@ namespace PocketIS.Controllers
                 Weaknesses = model.Weaknesses,
                 OpportunitiesForTheCompany = model.OpportunitiesForTheCompany,
                 ThreatsToTheCompany = model.ThreatsToTheCompany,
+                IsArchive = false,
                 InsertedDate = DateTime.Now
             };
 
@@ -74,6 +75,7 @@ namespace PocketIS.Controllers
                 Weaknesses = model.Weaknesses,
                 OpportunitiesForTheCompany = model.OpportunitiesForTheCompany,
                 ThreatsToTheCompany = model.ThreatsToTheCompany,
+                IsArchive = model.IsArchive,
                 InsertedDate = DateTime.Now
             };
 

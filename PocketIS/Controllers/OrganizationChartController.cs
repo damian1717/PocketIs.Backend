@@ -77,6 +77,14 @@ namespace PocketIS.Controllers
             return Ok();
         }
 
+        [HttpDelete]
+        [Route("DeleteOrganizationChartPersonAndBelowPersons/{id}")]
+        public async Task<IActionResult> DeleteOrganizationChartPersonAndBelowPersons(Guid id)
+        {
+            await _organizationChartService.DeleteOrganizationChartPersonAndBelowPersonsAsync(id);
+            return Ok();
+        }
+
         [HttpGet]
         [Route("getorganizationchartmaxlevel")]
         public async Task<IActionResult> GetOrganizationChartMaxLevel()

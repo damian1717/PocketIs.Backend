@@ -55,6 +55,7 @@ namespace PocketIS.Repositories
                 currentCompany.ThreatsToTheCompany = company.ThreatsToTheCompany;
                 currentCompany.UpdatedDate = DateTime.Now;
                 currentCompany.UpdatedUserId = UserId;
+                currentCompany.IsArchive = company.IsArchive;
 
                 _dbContext.Companies.Update(currentCompany);
                 await _dbContext.SaveChangesAsync();

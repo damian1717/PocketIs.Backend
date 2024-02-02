@@ -27,6 +27,7 @@ namespace PocketIS.Controllers
                 Link = model.Link,
                 Description = model.Description,
                 CompanyId = CompanyId,
+                Category = model.Category,
                 InsertedDate = DateTime.Now
             };
 
@@ -46,6 +47,7 @@ namespace PocketIS.Controllers
                 Name = model.Name,
                 Link = model.Link,
                 Description = model.Description,
+                Category = model.Category,
                 InsertedDate = DateTime.Now,
                 CompanyId = CompanyId
             };

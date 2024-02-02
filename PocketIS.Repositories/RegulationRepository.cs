@@ -46,6 +46,7 @@ namespace PocketIS.Repositories
                 currentRegulation.Link = regulation.Link;
                 currentRegulation.Description = regulation.Description;
                 currentRegulation.Name = regulation.Name;
+                currentRegulation.Category = regulation.Category;
                 currentRegulation.UpdatedDate = DateTime.Now;
                 currentRegulation.UpdatedUserId = UserId;
 

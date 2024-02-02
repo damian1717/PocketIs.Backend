@@ -20,5 +20,6 @@
         public string Weaknesses { get; set; }
         public string OpportunitiesForTheCompany { get; set; }
         public string ThreatsToTheCompany { get; set; }
+        public bool IsArchive { get; set; }
     }
 }

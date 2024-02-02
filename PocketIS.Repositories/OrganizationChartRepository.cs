@@ -23,7 +23,7 @@ namespace PocketIS.Repositories
             .FirstOrDefaultAsync(x => x.Id == id);
 
         public async Task<List<OrganizationChartPerson>> GetListOfPersonsAsync()
-            => await _dbContext.OrganizationChartPersons
+            => await _dbContext.OrganizationChartPersons.AsNoTracking()
                         .Where(x => x.CompanyId == CompanyId)
                         .ToListAsync();
 
@@ -81,6 +81,12 @@ namespace PocketIS.Repositories
                         .Where(x => x.CompanyId == CompanyId)
                         .MaxAsync(x => (int?)x.Level) 
                         ?? 0;
+        }
+
+        public async Task DeleteOrganizationChartPersonAndBelowPersonsAsync(List<OrganizationChartPerson> organizationCharts)
+        {
+            _dbContext.OrganizationChartPersons.RemoveRange(organizationCharts);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
