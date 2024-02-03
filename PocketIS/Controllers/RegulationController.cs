@@ -65,5 +65,13 @@ namespace PocketIS.Controllers
         [Route("getregulation/{id}")]
         public async Task<IActionResult> Get(Guid id) 
             => Ok(await _regulationService.GetRegulationByIdAsync(id));
+
+        [HttpDelete]
+        [Route("deleteregulation/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _regulationService.DeleteRegulationAsync(id);
+            return Ok();
+        }
     }
 }

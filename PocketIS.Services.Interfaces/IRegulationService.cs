@@ -11,5 +11,6 @@ namespace PocketIS.Services.Interfaces
         Task UpdateRegulationAsync(Regulation regulation);
         Task<List<Regulation>> GetRegulationsAsync();
         Task<Regulation> GetRegulationByIdAsync(Guid id);
+        Task DeleteRegulationAsync(Guid id);
     }
 }

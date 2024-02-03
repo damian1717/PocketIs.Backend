@@ -54,7 +54,8 @@ namespace PocketIS.Services
                 HorizontalSpace = 10,
                 VerticalSpace = 20,
                 BoxHeight = 45,
-                BoxWidth = 60
+                BoxWidth = 62,
+                FontName = "Roboto, Helvetica, sans-serif"
             };
 
             var nodes = GetModel(processName);

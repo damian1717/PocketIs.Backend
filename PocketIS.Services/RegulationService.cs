@@ -25,5 +25,8 @@ namespace PocketIS.Services
 
         public async Task UpdateRegulationAsync(Regulation regulation) 
             => await _regulationRepository.UpdateRegulationAsync(regulation);
+
+        public async Task DeleteRegulationAsync(Guid id)
+            => await _regulationRepository.DeleteRegulationAsync(id);
     }
 }

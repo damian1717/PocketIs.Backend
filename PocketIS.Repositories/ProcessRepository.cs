@@ -51,6 +51,7 @@ namespace PocketIS.Repositories
             if (currentProcess is not null)
             {
                 currentProcess.Name = process.Name;
+                currentProcess.ProcessType = process.ProcessType;
                 currentProcess.UpdatedDate = DateTime.Now;
                 currentProcess.UpdatedUserId = UserId;
 

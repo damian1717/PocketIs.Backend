@@ -4,5 +4,6 @@
     {
         public string Name { get; set; }
         public bool IsBaseProcess { get; set; }
+        public int ProcessType { get; set; }
     }
 }

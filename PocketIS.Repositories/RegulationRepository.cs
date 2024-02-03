@@ -54,5 +54,16 @@ namespace PocketIS.Repositories
                 await _dbContext.SaveChangesAsync();
             }
         }
+
+        public async Task DeleteRegulationAsync(Guid id)
+        {
+            var regulation = new Regulation()
+            {
+                Id = id
+            };
+
+            _dbContext.Regulations.Remove(regulation);
+            await _dbContext.SaveChangesAsync();
+        }
     }
 }

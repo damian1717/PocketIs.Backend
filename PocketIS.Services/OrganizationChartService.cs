@@ -100,8 +100,7 @@ namespace PocketIS.Services
                 VerticalSpace = 20,
                 BoxHeight = 45,
                 BoxWidth = 110,
-                //UseMinBoxWidthWhenHasOnlyOne = true,
-                //MinBoxWidth = 80
+                FontName = "Roboto, Helvetica, sans-serif"
             };
 
             var nodes = GetOrgChartNodes(chartNodes);

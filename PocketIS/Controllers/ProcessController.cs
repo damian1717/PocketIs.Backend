@@ -26,6 +26,7 @@ namespace PocketIS.Controllers
                 Name = model.Name,
                 CompanyId = CompanyId,
                 IsBaseProcess = model.IsBaseProcess,
+                ProcessType = model.ProcessType,
                 InsertedDate = DateTime.Now
             };
 
@@ -44,6 +45,7 @@ namespace PocketIS.Controllers
                 Id = model.Id,
                 Name = model.Name,
                 IsBaseProcess = model.IsBaseProcess,
+                ProcessType = model.ProcessType,
                 InsertedDate = DateTime.Now,
                 CompanyId = CompanyId
             };
@@ -72,7 +74,8 @@ namespace PocketIS.Controllers
                     Id = process.Id,
                     Name = process.Name,
                     CompanyName = process.IsBaseProcess ? string.Empty : process.Company?.Name ?? string.Empty,
-                    IsBaseProcess = process.IsBaseProcess
+                    IsBaseProcess = process.IsBaseProcess,
+                    ProcessType= process.ProcessType
                 };
 
                 processList.Add(pro);
