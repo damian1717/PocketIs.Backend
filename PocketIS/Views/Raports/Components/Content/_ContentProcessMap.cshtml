@@ -1,0 +1,76 @@
+﻿@using System.Linq;
+
+@model PocketIS.ReportGenerator.ReportSubReportModel<PocketIS.Models.Report.ProcessMap.ProcessMapModel>
+
+@{
+    var managerProcesses = Model.Model.Processes.Where(x => x.ProcessType == 1).ToList();
+    var mainProcesses = Model.Model.Processes.Where(x => x.ProcessType == 2).ToList();
+    var supportingProcesses = Model.Model.Processes.Where(x => x.ProcessType == 3).ToList();
+}
+
+<div class="content-map">
+    <table style="width:100%; border: none;" cellspacing="0" cellpadding="0">
+        <tr style='display:none;' style="border: none;">
+            <th style="border: none;"></th>
+            <th style="border: none;"></th>
+            <th style="border: none;"></th>
+        </tr>
+        <tr style="border: none;">
+            <td style="border: none;">
+                <img style="padding-top: 100px" src="~/images/requirements_client_left.png" alt="requirements_client_left.png">
+            </td>
+            <td style="border: none;">
+
+                <h3>PROCESY ZARZĄDCZE</h3>
+
+                @if (managerProcesses.Count > 0)
+                {
+                    foreach(var data in managerProcesses)
+                    {
+                        <p style="margin:0;  padding: 0;">- @data.Name</p>
+                    }
+                }
+                else
+                {
+                    <p style="margin:0">- Brak</p>
+                }
+
+                <img style="width: 80%; padding-top: 10px; padding-bottom: 10px;" src="~/images/arrow_bottom.png" alt="arrow_bottom.png">
+
+                <h3>PROCESY GŁÓWNE W FIRMIE</h3>
+
+                @if (mainProcesses.Count > 0)
+                {
+                    foreach(var data in mainProcesses)
+                    {
+                        <p style="margin:0;  padding: 0;">- @data.Name</p>
+                    }
+                }
+                else
+                {
+                    <p style="margin:0">- Brak</p>
+                }
+
+                <img style="padding-top: 10px; padding-bottom: 10px;" src="~/images/arrow_top.png" alt="arrow_top.png">
+
+                <h3>PROCESY WSPIERAJĄCE</h3>
+
+                @if (supportingProcesses.Count > 0)
+                {
+                    foreach(var data in supportingProcesses)
+                    {
+                        <p style="margin:0; padding: 0;">- @data.Name</p>
+                    }
+                }
+                else
+                {
+                    <p style="margin:0">- Brak</p>
+                }
+            </td>
+            <td style="border: none;">
+                <img style="padding-top: 100px" src="~/images/requirements_client_right.png" alt="requirements_client_right.png">
+            </td>
+        </tr>
+    </table>
+    
+</div>

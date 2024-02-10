@@ -280,7 +280,7 @@ namespace PocketIS.ReportGenerator
         }
 
         private static void OnImageLoadPdfSharp(object sender, HtmlImageLoadEventArgs e)
-        {/*
+        {
             if (e == null)
                 return;
 
@@ -320,7 +320,7 @@ namespace PocketIS.ReportGenerator
                         e.Callback(XImage.FromStream(stream));
                     }
                 }
-            }*/
+            }
         }
 
         private static LayoutConfig MakeDefaultLayoutConfig()

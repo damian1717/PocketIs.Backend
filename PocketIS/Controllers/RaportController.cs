@@ -8,6 +8,8 @@ using PocketIS.Infrastucture.Validation;
 using PocketIS.Models.Report;
 using PocketIS.Models.Report.ChartOrg;
 using PocketIS.Models.Report.DefinitionProcess;
+using PocketIS.Models.Report.ProcessMap;
+using PocketIS.PdfConverter;
 using PocketIS.ReportGenerator;
 using PocketIS.Services.Interfaces;
 
@@ -84,6 +86,35 @@ namespace PocketIS.Controllers
             model.ReportName = $"Karta Procesu {model.ProcessName}";
             string raportName = GenerateRaportName($"Karta_Procesu_{model.ProcessName}_wersja", numberForRaport);
             return await GeneratePdfReportAsync(ReportViews.GetDefault(), new DefinitionProcessReportModel(model, user), null, raportName, reportCode, numberForRaport);
+        }
+
+        [HttpPost]
+        [Route("GenerateProcessMapRaportPdf")]
+        public async Task<IActionResult> GenerateProcessMapRaportPdf(ProcessMapModel model)
+        {
+            var user = await _userService.GetAsync(UserId);
+
+            var allRaports = await _documentService.GetAllDocumentsByCodeAsync(RaportCodes.ProcessMap);
+
+            var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
+            model.ReportName = "Mapa procesów PocketISO";
+            model.CreatedDate = DateTime.Today;
+            model.Version = numberForRaport;
+            string raportName = GenerateRaportName("Mapa_procesów_PocketISO_wersja", numberForRaport);
+            var layout = new LayoutConfig
+            {
+                HeaderConfig = new PdfGenerateConfig { ManualPageSize = HtmlToPdfConverter.FromMillimeters(210, 35) },
+                BodyConfig = new PdfGenerateConfig
+                {
+                    ManualPageSize = HtmlToPdfConverter.FromMillimeters(210, 297),
+                    MarginTop = (int)HtmlToPdfConverter.MillimetersToUnits(35),
+                    MarginRight = (int)HtmlToPdfConverter.MillimetersToUnits(5),
+                    MarginBottom = (int)HtmlToPdfConverter.MillimetersToUnits(20),
+                    MarginLeft = (int)HtmlToPdfConverter.MillimetersToUnits(5)
+                },
+                FooterConfig = new PdfGenerateConfig { ManualPageSize = HtmlToPdfConverter.FromMillimeters(210, 20) }
+            };
+            return await GeneratePdfReportAsync(ReportViews.GetDefault(), new ProcessMapReportModel(model, user), layout, raportName, RaportCodes.ProcessMap, numberForRaport);
         }
 
         /// <summary>   

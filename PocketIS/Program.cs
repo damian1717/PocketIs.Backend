@@ -6,6 +6,7 @@ using PocketIS.Application.Common.Mvc;
 using PocketIS.Application.Common.Swagger;
 using PocketIS.Framwork;
 using PocketIS.Infrastucture.Persistence;
+using PocketIS.ReportGenerator;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
@@ -45,6 +46,7 @@ builder.Services.Configure<RazorViewEngineOptions>(c =>
 builder.Services.AddRepositories();
 builder.Services.AddPersistence(builder.Configuration);
 
+HtmlToPdfConverter.ImagesFolder = builder.Environment.WebRootPath;
 
 var app = builder.Build();
 
@@ -57,6 +59,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
+
 app.UseErrorHandler();
 
 app.UseCors(MyAllowSpecificOrigins);
@@ -67,3 +72,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
