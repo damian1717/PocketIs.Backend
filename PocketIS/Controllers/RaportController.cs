@@ -9,6 +9,7 @@ using PocketIS.Models.Report;
 using PocketIS.Models.Report.ChartOrg;
 using PocketIS.Models.Report.DefinitionProcess;
 using PocketIS.Models.Report.ProcessMap;
+using PocketIS.Models.Report.SubProcess;
 using PocketIS.PdfConverter;
 using PocketIS.ReportGenerator;
 using PocketIS.Services.Interfaces;
@@ -117,6 +118,17 @@ namespace PocketIS.Controllers
             return await GeneratePdfReportAsync(ReportViews.GetDefault(), new ProcessMapReportModel(model, user), layout, raportName, RaportCodes.ProcessMap, numberForRaport);
         }
 
+        [HttpPost]
+        [Route("GenerateSubProcessRaportPdf")]
+        public async Task<IActionResult> GenerateSubProcessRaportPdf(SubProcessModel model)
+        {
+            var user = await _userService.GetAsync(UserId);
+
+            model.ReportName = model.Name;
+            return await GeneratePdfReportAsync(ReportViews.GetDefault(), 
+                new SubProcessReportModel(model, user), null, model.ReportName, string.Empty, 0, false);
+        }
+
         /// <summary>   
         /// Generates a report in PDF format
         /// </summary>
@@ -124,24 +136,27 @@ namespace PocketIS.Controllers
         /// <param name="views">names of the report's section views to render</param>
         /// <param name="layout">page parameters</param>
         /// <returns>pdf-file in the form of a byte array</returns>
-        private async Task<FileContentResult> GeneratePdfReportAsync<T>(IViewConfig views, IReportModel<T> reportModel, LayoutConfig layout, string raportName, string raportCode, int version)
+        private async Task<FileContentResult> GeneratePdfReportAsync<T>(IViewConfig views, IReportModel<T> reportModel, LayoutConfig layout, string raportName, string raportCode, int version, bool saveFile = true)
         {
             var content = await HtmlToPdfConverter.RenderHtmlPagesToPdfAsync(views, reportModel, _renderService, layout)
                 .ConfigureAwait(false);
 
-            var document = new Document
+            if (saveFile)
             {
-                Id = Guid.NewGuid(),
-                Code = raportCode,
-                Name = raportName,
-                FileData = content,
-                InsertedDate = DateTime.Now,
-                CompanyId = CompanyId,
-                Version = version
-            };
-            
-            await _documentService.SaveDocumentAsync(document);
+                var document = new Document
+                {
+                    Id = Guid.NewGuid(),
+                    Code = raportCode,
+                    Name = raportName,
+                    FileData = content,
+                    InsertedDate = DateTime.Now,
+                    CompanyId = CompanyId,
+                    Version = version
+                };
 
+                await _documentService.SaveDocumentAsync(document);
+            }
+            
             return File(content, Constants.PdfContentMime, raportName);
         }
 

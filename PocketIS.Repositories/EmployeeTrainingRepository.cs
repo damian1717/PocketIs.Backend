@@ -52,9 +52,9 @@ namespace PocketIS.Repositories
             .ToListAsync();
 
         public async Task<List<EmployeeTraining>> GetEmployeeTrainingsAsync()
-        => await _dbContext.EmployeeTrainings
-            .Where(x => x.CompanyId == CompanyId)
-            .ToListAsync();
+            => await _dbContext.EmployeeTrainings
+                .Where(x => x.CompanyId == CompanyId)
+                .ToListAsync();
 
         public async Task<EmployeeTraining> GetLastModifiedRecordAsync()
         {

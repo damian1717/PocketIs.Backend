@@ -19,6 +19,7 @@ namespace PocketIS.Application.Common.Interfaces
         DbSet<Training> Trainings { get; set; }
         DbSet<Employee> Employees { get; set; }
         DbSet<EmployeeTraining> EmployeeTrainings { get; set; }
+        DbSet<SubProcess> SubProcesses { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

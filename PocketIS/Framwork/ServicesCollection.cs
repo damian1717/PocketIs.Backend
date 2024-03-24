@@ -31,6 +31,7 @@ namespace PocketIS.Framwork
             services.AddTransient<ITrainingService, TrainingService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IEmployeeTrainingService, EmployeeTrainingService>();
+            services.AddTransient<ISubProcessService, SubProcessService>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserProvider, UserProvider>();
 
@@ -52,6 +53,7 @@ namespace PocketIS.Framwork
             services.AddTransient<ITrainingRepository, TrainingRepository>();
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<IEmployeeTrainingRepository, EmployeeTrainingRepository>();
+            services.AddTransient<ISubProcessRepository, SubProcessRepository>();
 
             return services;
         }
