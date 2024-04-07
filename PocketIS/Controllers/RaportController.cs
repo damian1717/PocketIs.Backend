@@ -124,9 +124,9 @@ namespace PocketIS.Controllers
         {
             var user = await _userService.GetAsync(UserId);
 
-            model.ReportName = model.Name;
+            model.ReportName = $"{model.Name} - {model.Description}";
             return await GeneratePdfReportAsync(ReportViews.GetDefault(), 
-                new SubProcessReportModel(model, user), null, model.ReportName, string.Empty, 0, false);
+                new SubProcessReportModel(model, user), null, model.ReportName, string.Empty, 0, false, model.Name);
         }
 
         /// <summary>   
@@ -136,7 +136,7 @@ namespace PocketIS.Controllers
         /// <param name="views">names of the report's section views to render</param>
         /// <param name="layout">page parameters</param>
         /// <returns>pdf-file in the form of a byte array</returns>
-        private async Task<FileContentResult> GeneratePdfReportAsync<T>(IViewConfig views, IReportModel<T> reportModel, LayoutConfig layout, string raportName, string raportCode, int version, bool saveFile = true)
+        private async Task<FileContentResult> GeneratePdfReportAsync<T>(IViewConfig views, IReportModel<T> reportModel, LayoutConfig layout, string raportName, string raportCode, int version, bool saveFile = true, string customFileName = "")
         {
             var content = await HtmlToPdfConverter.RenderHtmlPagesToPdfAsync(views, reportModel, _renderService, layout)
                 .ConfigureAwait(false);
@@ -157,7 +157,7 @@ namespace PocketIS.Controllers
                 await _documentService.SaveDocumentAsync(document);
             }
             
-            return File(content, Constants.PdfContentMime, raportName);
+            return File(content, Constants.PdfContentMime, string.IsNullOrWhiteSpace(customFileName) ? raportName : customFileName);
         }
 
         private string GenerateRaportName(string raportName, int numberForRaport)

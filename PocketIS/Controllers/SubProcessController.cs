@@ -24,9 +24,11 @@ namespace PocketIS.Controllers
             var subProcess = new SubProcess
             {
                 Name = model.Name,
+                Description = model.Description,
                 SubProcessType = model.SubProcessType,
                 HtmlContent = model.HtmlContent,
                 CompanyId = CompanyId,
+                IsArchive = false,
                 InsertedDate = DateTime.Now
             };
 
@@ -44,9 +46,11 @@ namespace PocketIS.Controllers
             {
                 Id = model.Id,
                 Name = model.Name,
+                Description = model.Description,
                 SubProcessType = model.SubProcessType,
                 HtmlContent = model.HtmlContent,
-                CompanyId = CompanyId
+                CompanyId = CompanyId,
+                IsArchive = model.IsArchive
             };
 
             await _subProcessService.UpdateSubProcessAsync(subProcess);

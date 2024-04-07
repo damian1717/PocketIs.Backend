@@ -59,6 +59,8 @@ namespace PocketIS.Repositories
             {
                 currentSubProcess.HtmlContent = subProcess.HtmlContent;
                 currentSubProcess.SubProcessType = subProcess.SubProcessType;
+                currentSubProcess.Description = subProcess.Description;
+                currentSubProcess.IsArchive = subProcess.IsArchive;
                 currentSubProcess.UpdatedDate = DateTime.Now;
                 currentSubProcess.UpdatedUserId = UserId;
 
