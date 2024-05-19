@@ -19,5 +19,6 @@
         public string Weaknesses { get; set; }
         public string OpportunitiesForTheCompany { get; set; }
         public string ThreatsToTheCompany { get; set; }
+        public string ContactDetails { get; set; }
     }
 }

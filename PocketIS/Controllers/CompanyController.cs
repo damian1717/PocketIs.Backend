@@ -19,7 +19,6 @@ namespace PocketIS.Controllers
 
         [HttpPost]
         [Route("addcompany")]
-        //[ValidateModel]
         public async Task<IActionResult> AddCompany(AddCompanyModel model)
         {
             var company = new Company
@@ -41,6 +40,7 @@ namespace PocketIS.Controllers
                 Weaknesses = model.Weaknesses,
                 OpportunitiesForTheCompany = model.OpportunitiesForTheCompany,
                 ThreatsToTheCompany = model.ThreatsToTheCompany,
+                ContactDetails = model.ContactDetails,
                 IsArchive = false,
                 InsertedDate = DateTime.Now
             };
@@ -75,6 +75,7 @@ namespace PocketIS.Controllers
                 Weaknesses = model.Weaknesses,
                 OpportunitiesForTheCompany = model.OpportunitiesForTheCompany,
                 ThreatsToTheCompany = model.ThreatsToTheCompany,
+                ContactDetails = model.ContactDetails,
                 IsArchive = model.IsArchive,
                 InsertedDate = DateTime.Now
             };

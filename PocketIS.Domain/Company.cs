@@ -41,6 +41,7 @@ namespace PocketIS.Domain
         public string? OpportunitiesForTheCompany { get; set; }
 
         public string? ThreatsToTheCompany { get; set; }
+        public string? ContactDetails { get; set; }
         public bool IsArchive { get; set; }
         public ICollection<User> Users { get; } = new List<User>();
         public ICollection<QualityPolicy> QualityPolicies { get; } = new List<QualityPolicy>();
@@ -52,5 +53,6 @@ namespace PocketIS.Domain
         public ICollection<Training> Trainings { get; } = new List<Training>();
         public ICollection<Employee> EmployeeForTrainings { get; } = new List<Employee>();
         public ICollection<EmployeeTraining> EmployeeTrainings { get; } = new List<EmployeeTraining>();
+        public ICollection<OrganizationalContext> OrganizationalContexts { get; } = new List<OrganizationalContext>();
     }
 }
