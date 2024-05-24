@@ -7,7 +7,6 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Role { get; set; }
-        public Guid CompanyId { get; set; }
-        public string CompanyName { get; set; }
+        public CompanyInfo Company { get; set; }
     }
 }

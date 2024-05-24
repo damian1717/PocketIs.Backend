@@ -1,8 +1,19 @@
-﻿namespace PocketIS.Domain
+﻿namespace PocketIS.Models.Report.OrganizationalContext
 {
-    public class OrganizationalContext : BaseEntity<Guid>
+    public class OrganizationalContextModel : BaseReportModel
     {
+        public string? CompanyName { get; set; }
+        public string? Address { get; set; }
+        public string? Nip { get; set; }
+        public string? Director { get; set; }
+
         public string? Industry { get; set; }
+
+        public string? GoalAndStrategy { get; set; }
+
+        public string? TechnologiesOwned { get; set; }
+
+        public string? CommunicationSystem { get; set; }
 
         public string? FactorsTechnologicalEnvironment { get; set; }
 
@@ -22,7 +33,5 @@
 
         public string? NumberNorm { get; set; }
         public string? NormJustification { get; set; }
-        public Guid CompanyId { get; set; }
-        public Company Company { get; set; } = null!;
     }
 }

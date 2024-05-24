@@ -25,9 +25,6 @@ namespace PocketIS.Controllers
             {
                 CompanyId = CompanyId,
                 Industry = model.Industry,
-                GoalAndStrategy = model.GoalAndStrategy,
-                TechnologiesOwned = model.TechnologiesOwned,
-                CommunicationSystem = model.CommunicationSystem,
                 FactorsTechnologicalEnvironment = model.FactorsTechnologicalEnvironment,
                 FactorsRelatedToValuesCulture = model.FactorsRelatedToValuesCulture,
                 ExternalAndInternalEntities = model.ExternalAndInternalEntities,
@@ -54,9 +51,6 @@ namespace PocketIS.Controllers
             {
                 Id = model.Id,
                 Industry = model.Industry,
-                GoalAndStrategy = model.GoalAndStrategy,
-                TechnologiesOwned = model.TechnologiesOwned,
-                CommunicationSystem = model.CommunicationSystem,
                 FactorsTechnologicalEnvironment = model.FactorsTechnologicalEnvironment,
                 FactorsRelatedToValuesCulture = model.FactorsRelatedToValuesCulture,
                 ExternalAndInternalEntities = model.ExternalAndInternalEntities,
@@ -74,7 +68,8 @@ namespace PocketIS.Controllers
         }
 
         [HttpGet]
-        [Route("getorganizationalcontextbyuserid/{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(await _organizationalContextService.GetOrganizationalContextByUserIdAsync(UserId));
+        [Route("getorganizationalcontextbyuserid")]
+        public async Task<IActionResult> Get() 
+            => Ok(await _organizationalContextService.GetOrganizationalContextByUserIdAsync(UserId));
     }
 }

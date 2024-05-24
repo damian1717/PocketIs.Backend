@@ -65,8 +65,18 @@ namespace PocketIS.Services
                 LastName = user.LastName,
                 Email = user.Email,
                 Role = user.Role,
-                CompanyId = user.CompanyId,
-                CompanyName = user.Company?.Name ?? string.Empty
+                Company = new CompanyInfo(
+                    user.CompanyId,
+                    user.Company?.Name ?? string.Empty,
+                    user.Company?.Nip ?? string.Empty,
+                    user.Company?.City ?? string.Empty,
+                    user.Company?.PostalCode ?? string.Empty,
+                    user.Company?.Street ?? string.Empty,
+                    user.Company?.NumberBuilding ?? string.Empty,
+                    user.Company?.NumberApartment ?? string.Empty,
+                    user.Company?.KnowHow ?? string.Empty,
+                    user.Company?.ItemsCompany ?? string.Empty,
+                    user.Company?.TechnologiesUsed ?? string.Empty)
             };
         }
 
@@ -83,7 +93,18 @@ namespace PocketIS.Services
                 LastName = user.LastName,
                 Email = user.Email,
                 Role = user.Role,
-                CompanyId = user.CompanyId
+                Company = new CompanyInfo(
+                    user.CompanyId, 
+                    user.Company?.Name ?? string.Empty,
+                    user.Company?.Nip ?? string.Empty,
+                    user.Company?.City ?? string.Empty,
+                    user.Company?.PostalCode ?? string.Empty,
+                    user.Company?.Street ?? string.Empty,
+                    user.Company?.NumberBuilding ?? string.Empty,
+                    user.Company?.NumberApartment ?? string.Empty,
+                    user.Company?.KnowHow ?? string.Empty,
+                    user.Company?.ItemsCompany ?? string.Empty,
+                    user.Company?.TechnologiesUsed ?? string.Empty)
             };
         }
 

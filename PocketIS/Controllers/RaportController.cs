@@ -8,6 +8,7 @@ using PocketIS.Infrastucture.Validation;
 using PocketIS.Models.Report;
 using PocketIS.Models.Report.ChartOrg;
 using PocketIS.Models.Report.DefinitionProcess;
+using PocketIS.Models.Report.OrganizationalContext;
 using PocketIS.Models.Report.ProcessMap;
 using PocketIS.Models.Report.SubProcess;
 using PocketIS.PdfConverter;
@@ -127,6 +128,21 @@ namespace PocketIS.Controllers
             model.ReportName = $"{model.Name} - {model.Description}";
             return await GeneratePdfReportAsync(ReportViews.GetDefault(), 
                 new SubProcessReportModel(model, user), null, model.ReportName, string.Empty, 0, false, model.Name);
+        }
+
+        [HttpPost]
+        [Route("GenerateOrganizationalContextRaportPdf")]
+        public async Task<IActionResult> GenerateOrganizationalContextRaportPdf(OrganizationalContextModel model)
+        {
+            var user = await _userService.GetAsync(UserId);
+            var allRaports = await _documentService.GetAllDocumentsByCodeAndUserIdAsync(RaportCodes.OrganizationContext, UserId);
+
+            var numberForRaport = allRaports is not null ? allRaports.Count + 1 : 1;
+            model.ReportName = "Kontekst Organizacji";
+            model.CreatedDate = DateTime.Today;
+            model.Version = numberForRaport;
+            string raportName = GenerateRaportName("Kontekst_Organizacji_wersja", numberForRaport);
+            return await GeneratePdfReportAsync(ReportViews.GetDefault(), new OrganizationalContextReportModel(model, user), null, raportName, RaportCodes.OrganizationContext, numberForRaport);
         }
 
         /// <summary>   

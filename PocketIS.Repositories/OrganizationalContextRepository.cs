@@ -39,9 +39,6 @@ namespace PocketIS.Repositories
             if (currentOrganizationalContext is not null)
             {
                 currentOrganizationalContext.Industry = organizationalContext.Industry;
-                currentOrganizationalContext.GoalAndStrategy = organizationalContext.GoalAndStrategy;
-                currentOrganizationalContext.TechnologiesOwned = organizationalContext.TechnologiesOwned;
-                currentOrganizationalContext.CommunicationSystem = organizationalContext.CommunicationSystem;
                 currentOrganizationalContext.FactorsTechnologicalEnvironment = organizationalContext.FactorsTechnologicalEnvironment;
                 currentOrganizationalContext.FactorsRelatedToValuesCulture = organizationalContext.FactorsRelatedToValuesCulture;
                 currentOrganizationalContext.ExternalAndInternalEntities = organizationalContext.ExternalAndInternalEntities;

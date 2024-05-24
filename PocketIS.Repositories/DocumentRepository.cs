@@ -29,6 +29,13 @@ namespace PocketIS.Repositories
                 .OrderByDescending(x => x.InsertedDate)
                 .ToListAsync();
 
+        public async Task<List<Document>> GetAllDocumentsByCodeAndUserIdAsync(string code, Guid userId)
+            => await _dbContext.Documents
+                .Where(x => x.Code == code
+                && x.CompanyId == CompanyId
+                && x.InsertedUserId == userId)
+                .OrderByDescending(x => x.InsertedDate)
+                .ToListAsync();
         public async Task<Document> GetDocumnetAsync(Guid id)
             => await _dbContext.Documents
                     .FirstOrDefaultAsync(x => x.Id == id);

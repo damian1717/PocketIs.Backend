@@ -21,6 +21,9 @@ namespace PocketIS.Services
         public async Task<List<Document>> GetAllDocumentsByCodeAsync(string code) 
             => await _repository.GetAllDocumentsByCodeAsync(code);
 
+        public async Task<List<Document>> GetAllDocumentsByCodeAndUserIdAsync(string code, Guid userId)
+            => await _repository.GetAllDocumentsByCodeAndUserIdAsync(code, userId);
+
         public async Task<Document> GetDocumnetAsync(Guid id) 
             => await _repository.GetDocumnetAsync(id);
 

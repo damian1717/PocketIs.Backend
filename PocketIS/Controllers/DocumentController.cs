@@ -24,6 +24,11 @@ namespace PocketIS.Controllers
             => Ok(await _documentService.GetAllDocumentsByCodeAsync(code));
 
         [HttpGet]
+        [Route("GetAllDocumentsByCodeAndUserId")]
+        public async Task<IActionResult> GetAllDocumentsByCodeAndUserId(string code)
+            => Ok(await _documentService.GetAllDocumentsByCodeAndUserIdAsync(code, UserId));
+
+        [HttpGet]
         [Route("GetDocument")]
         public async Task<IActionResult> Get(Guid id) 
             => Ok(await _documentService.GetDocumnetAsync(id));

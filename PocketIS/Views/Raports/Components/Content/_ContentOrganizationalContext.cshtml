@@ -1,0 +1,58 @@
+﻿@using System.Linq;
+
+@model PocketIS.ReportGenerator.ReportSubReportModel<PocketIS.Models.Report.OrganizationalContext.OrganizationalContextModel>
+
+    @{
+    var name = Model.Model.ReportName;
+    var user = Model?.User;
+    var company = user?.Company;
+    var address = user?.Company?.Address ?? string.Empty;
+}
+
+<div style="text-align: left;">
+    <p style="margin: 0;">
+        Organizacja @company.Name, z siedzibą @address, NIP: @company.Nip, reprezentowana przez: właścicielkę @user.FirstName @user.LastName, działająca w obszarze @Model.Model.Industry, postanawia określić:
+    </p>
+    <p style="margin: 0;">
+        Cel i strategię działania firmy jako @company.ItemsCompany . Firma dysponuje @(company.TechnologiesUsed).
+    </p>
+    <p style="margin: 0;">
+        Porozumienie oraz kontakt pomiędzy klientem lub potencjalnym klientem a organizacją odbywa się za pomocą @(company.KnowHow).
+    </p>
+    <p style="margin: 0;">
+        Czynniki zewnętrzne aktualnie wpływające na funkcjonowanie organizacji zostały przedstawione poniżej: 
+        @Model.Model.FactorsTechnologicalEnvironment
+    </p>
+    <p style="margin: 0;">
+        Czynniki wewnętrzne aktualnie wpływające na funkcjonowanie organizacji zostały przedstawione poniżej: 
+        @Model.Model.FactorsRelatedToValuesCulture
+    </p>
+    <p style="margin: 0;">
+        Jako strony zainteresowane oraz wymagania tych stron, organizacja określa: @(Model.Model.ExternalAndInternalEntities).
+    </p>
+    <p style="margin: 0;">
+        Firma przyjmuje jako swoje silne strony: @(Model.Model.Strengths).
+    </p>
+    <p style="margin: 0;">
+        Jednocześnie jest również w stanie określić słabe strony: @(Model.Model.Weaknesses).
+    </p>
+    <p style="margin: 0;">
+        Widoczne szanse pojawiające się przed firmą to: @(Model.Model.Chances).
+    </p>
+    <p style="margin: 0;">
+        Równo z szansami, zostaje zachowana świadomość zagrożeń mogących mieć wpływ na funkcjonowanie firmy: @(Model.Model.Threats).
+    </p>
+
+    @if(Model.Model.Norm == 2)
+    {
+        <p style="margin: 0;">
+            W zakresie funkcjonującego systemu zarządzania jakością organizacja stwierdza, że punkt normy: @Model.Model.NumberNorm nie znajduje zastosowania, ponieważ: @Model.Model.NormJustification . Pozostałe punkty są organizacji znane i stosowane.
+        </p>
+    }
+    else
+    {
+        <p style="margin: 0;">
+            W zakresie funkcjonującego systemu zarządzania jakością organizacja potwierdza, że wszystkie punkty normy ISO są jej znane i stosowane.
+        </p>
+    }
+</div>

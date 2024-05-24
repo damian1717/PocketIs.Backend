@@ -3,7 +3,7 @@
 @{
     var name = Model.Model.ReportName;
     var user = Model?.User;
-    var companyName = user?.CompanyName ?? string.Empty;
+    var companyName = user?.Company?.Name ?? string.Empty;
 }
 
 <div class="header">
