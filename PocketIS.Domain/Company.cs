@@ -54,5 +54,6 @@ namespace PocketIS.Domain
         public ICollection<Employee> EmployeeForTrainings { get; } = new List<Employee>();
         public ICollection<EmployeeTraining> EmployeeTrainings { get; } = new List<EmployeeTraining>();
         public ICollection<OrganizationalContext> OrganizationalContexts { get; } = new List<OrganizationalContext>();
+        public ICollection<Device> Devices { get; } = new List<Device>();
     }
 }
