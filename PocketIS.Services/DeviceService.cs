@@ -35,13 +35,13 @@ namespace PocketIS.Services
                     DeviceType = device.DeviceType
                 };
 
-                if (device.NextOverviewDate > DateTime.Now)
+                if (device.NextOverviewDate < DateTime.Now)
                 {
                     dev.CssClass = "after_term";
                 }
-                else if (device.NextOverviewDate.AddMonths(1) > (DateTime.Now))
+                else if (device.NextOverviewDate.AddMonths(-1) < DateTime.Now)
                 {
-                    dev.CssClass = "before_term";
+                    dev.CssClass = "before_term"; 
                 }
                 
                 deviceInfos.Add(dev);
