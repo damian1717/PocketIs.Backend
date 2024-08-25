@@ -1,5 +1,6 @@
 ﻿using PocketIS.Domain;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PocketIS.Repositories.Interfaces
@@ -9,7 +10,7 @@ namespace PocketIS.Repositories.Interfaces
         Task<Guid> AddRiskAnalysAsync(RiskAnalys risk);
         Task UpdateRiskAnalysAsync(RiskAnalys risk);
         Task<RiskAnalys> GetRiskAnalysAsync(Guid id);
-        Task<RiskAnalys> GetRiskAnalysByProcessIdAsync(Guid processId);
+        Task<List<RiskAnalys>> GetRiskAnalysByProcessIdAndTypeAsync(Guid processId, int type);
         Task DeleteRiskAnalysAsync(Guid id);
     }
 }

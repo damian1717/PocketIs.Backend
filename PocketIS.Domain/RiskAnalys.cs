@@ -3,7 +3,8 @@
     public class RiskAnalys : BaseEntity<Guid>
     {
         public Guid ProcessId { get; set; }
-        public int ProcessType { get; set; }
+        public int Type { get; set; }
+        public int RiskType { get; set; }
         public string DefinedIssue { get; set; }
         public string PotentialCause { get; set; }
         public int Degree { get; set; }
@@ -21,5 +22,8 @@
         public string? PersonForEmergencyPlan { get; set; }
         public string? AssessmentOfVerificationEffectiveness { get; set; }
         public string? OwnerOfProcess { get; set; }
+        public string? ChangedFields { get; set; }
+        public int? Version { get; set; }
+        public Guid? CurrentUpdateId { get; set; }
     }
 }

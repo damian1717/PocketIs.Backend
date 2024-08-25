@@ -93,5 +93,10 @@ namespace PocketIS.Controllers
         [Route("getcompany/{id}")]
         public async Task<IActionResult> Get(Guid id) 
             => Ok(await _companyService.GetCompanyByIdAsync(id));
+
+        [HttpGet]
+        [Route("getcurrentcompanyid")]
+        public async Task<IActionResult> GetCurrentCompanyId()
+            => Ok(CompanyId);
     }
 }

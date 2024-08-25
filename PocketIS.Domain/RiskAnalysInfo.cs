@@ -1,9 +1,9 @@
-﻿namespace PocketIS.Models.RiskAnalys
+﻿namespace PocketIS.Domain
 {
-    public class UpdateRiskAnalys
+    public class RiskAnalysInfo
     {
-        public Guid ProcessId { get; set; }
         public Guid Id { get; set; }
+        public Guid ProcessId { get; set; }
         public int Type { get; set; }
         public int RiskType { get; set; }
         public string DefinedIssue { get; set; }
@@ -23,7 +23,13 @@
         public string? PersonForEmergencyPlan { get; set; }
         public string? AssessmentOfVerificationEffectiveness { get; set; }
         public string? OwnerOfProcess { get; set; }
+        public int? Rate { get; set; }
+        public int? Rate2 { get; set; }
+        public string? RateClass { get; set; }
+        public string? Rate2Class { get; set; }
         public string? ChangedFields { get; set; }
-        public Guid? CurrentUpdateId { get; set; }
+        public string? ModifiedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public int? Version { get; set; }
     }
 }

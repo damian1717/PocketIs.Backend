@@ -45,10 +45,12 @@ namespace PocketIS.Repositories
             => await _dbContext.RiskAnalyses
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-        public async Task<RiskAnalys> GetRiskAnalysByProcessIdAsync(Guid processId)
+        public async Task<List<RiskAnalys>> GetRiskAnalysByProcessIdAndTypeAsync(Guid processId, int type)
             => await _dbContext.RiskAnalyses
                 .AsNoTracking()
-                .FirstOrDefaultAsync(x => x.ProcessId == processId);
+                .Where(x => x.ProcessId == processId
+                && x.Type == type)
+                .ToListAsync();
 
         public async Task UpdateRiskAnalysAsync(RiskAnalys risk)
         {
@@ -56,7 +58,7 @@ namespace PocketIS.Repositories
 
             if (currentRisk is not null)
             {
-                currentRisk.ProcessType = risk.ProcessType;
+                currentRisk.RiskType = risk.RiskType;
                 currentRisk.DefinedIssue = risk.DefinedIssue;
                 currentRisk.PotentialCause = risk.PotentialCause;
                 currentRisk.Degree = risk.Degree;
@@ -74,6 +76,9 @@ namespace PocketIS.Repositories
                 currentRisk.PersonForEmergencyPlan = risk.PersonForEmergencyPlan;
                 currentRisk.AssessmentOfVerificationEffectiveness = risk.AssessmentOfVerificationEffectiveness;
                 currentRisk.OwnerOfProcess = risk.OwnerOfProcess;
+                currentRisk.ChangedFields = risk.ChangedFields;
+                currentRisk.Version = risk.Version;
+                currentRisk.CurrentUpdateId = risk.CurrentUpdateId;
 
                 currentRisk.UpdatedDate = DateTime.Now;
                 currentRisk.UpdatedUserId = UserId;

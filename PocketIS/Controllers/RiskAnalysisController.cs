@@ -24,12 +24,16 @@ namespace PocketIS.Controllers
             var risk = new RiskAnalys
             {
                 ProcessId = model.ProcessId,
-                ProcessType = model.ProcessType,
+                Type = model.Type,
+                RiskType = model.RiskType,
                 DefinedIssue = model.DefinedIssue,
                 PotentialCause = model.PotentialCause,
                 Degree = model.Degree,
                 Occurrence = model.Occurrence,
                 OwnerOfProcess = model.OwnerOfProcess,
+                CurrentUpdateId = model.CurrentUpdateId,
+                Version = 1,
+                ChangedFields = "add",
                 InsertedDate = DateTime.Now
             };
 
@@ -46,7 +50,8 @@ namespace PocketIS.Controllers
             {
                 Id = model.Id,
                 ProcessId = model.ProcessId,
-                ProcessType = model.ProcessType,
+                Type = model.Type,
+                RiskType = model.RiskType,
                 DefinedIssue = model.DefinedIssue,
                 PotentialCause = model.PotentialCause,
                 Degree = model.Degree,
@@ -64,7 +69,9 @@ namespace PocketIS.Controllers
                 EmergencyPlan = model.EmergencyPlan,
                 PersonForEmergencyPlan = model.PersonForEmergencyPlan,
                 AssessmentOfVerificationEffectiveness = model.AssessmentOfVerificationEffectiveness,
-                OwnerOfProcess = model.OwnerOfProcess
+                OwnerOfProcess = model.OwnerOfProcess,
+                ChangedFields = model.ChangedFields,
+                CurrentUpdateId = model.CurrentUpdateId
             };
 
             await _riskAnalysisService.UpdateRiskAnalysAsync(risk);
@@ -72,9 +79,9 @@ namespace PocketIS.Controllers
         }
 
         [HttpGet]
-        [Route("getriskanalysbyprocessid/{processId}")]
-        public async Task<IActionResult> GetRiskAnalysByProcessId(Guid processId)
-            => Ok(await _riskAnalysisService.GetRiskAnalysByProcessIdAsync(processId));
+        [Route("getriskanalysbyprocessidandtype/{type}/{processId}")]
+        public async Task<IActionResult> GetRiskAnalysByProcessId(Guid processId, int type)
+            => Ok(await _riskAnalysisService.GetRiskAnalysByProcessIdAndTypeAsync(processId, type));
 
         [HttpGet]
         [Route("getriskanalys/{id}")]
