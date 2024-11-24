@@ -29,6 +29,12 @@ namespace PocketIS.Repositories
                 .OrderByDescending(x => x.InsertedDate)
                 .ToListAsync();
 
+        public async Task<List<Document>> GetAllDocumentsByCodesAsync(List<string> codes)
+            => await _dbContext.Documents
+                .Where(x => codes.Contains(x.Code)
+                && x.CompanyId == CompanyId)
+                .ToListAsync();
+
         public async Task<List<Document>> GetAllDocumentsByCodeAndUserIdAsync(string code, Guid userId)
             => await _dbContext.Documents
                 .Where(x => x.Code == code
@@ -49,6 +55,17 @@ namespace PocketIS.Repositories
 
             await _dbContext.Documents.AddAsync(document);
             return await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var document = new Document()
+            {
+                Id = id
+            };
+
+            _dbContext.Documents.Remove(document);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

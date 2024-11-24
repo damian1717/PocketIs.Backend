@@ -62,19 +62,48 @@ namespace PocketIS.Controllers
         public async Task<IActionResult> Upload()
         {
             var file = Request.Form.Files[0];
-
             var document = new Document
             {
                 Id = Guid.NewGuid(),
-                Code = RaportCodes.OrganizationChart,
-                Name = await GetRaportNameAsync(),
+                Code = await GetRaportNameAsync(),
+                Name = file.FileName,
                 FileData = await GetBytes(file),
                 InsertedDate = DateTime.Now,
                 CompanyId = CompanyId
             };
 
-            await _documentService.SaveDocumentAsync(document);
+                await _documentService.SaveDocumentAsync(document);
+            return Ok();
+        }
 
+        [HttpPost]
+        [Route("upload/{code}")]
+        public async Task<IActionResult> Upload(string code)
+        {
+            if (Request.Form.Files is null || !Request.Form.Files.Any()) return Ok();
+
+            foreach (var file in Request.Form.Files)
+            {
+                var document = new Document
+                {
+                    Id = Guid.NewGuid(),
+                    Code = code,
+                    Name = file.FileName,
+                    FileData = await GetBytes(file),
+                    InsertedDate = DateTime.Now,
+                    CompanyId = CompanyId
+                };
+
+                await _documentService.SaveDocumentAsync(document);
+            }
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("delete/{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _documentService.DeleteAsync(id);
 
             return Ok();
         }

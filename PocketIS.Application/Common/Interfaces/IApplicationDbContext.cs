@@ -23,6 +23,7 @@ namespace PocketIS.Application.Common.Interfaces
         DbSet<OrganizationalContext> OrganizationalContexts { get; set; }
         DbSet<Device> Devices { get; set; }
         DbSet<RiskAnalys> RiskAnalyses { get; set; }
+        DbSet<Complaint> Complaints { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

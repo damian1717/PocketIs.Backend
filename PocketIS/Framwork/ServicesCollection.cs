@@ -35,6 +35,7 @@ namespace PocketIS.Framwork
             services.AddTransient<IOrganizationalContextService, OrganizationalContextService>();
             services.AddTransient<IDeviceService, DeviceService>();
             services.AddTransient<IRiskAnalysisService, RiskAnalysisService>();
+            services.AddTransient<IComplaintService, ComplaintService>();
             services.AddHttpContextAccessor();
             services.AddScoped<IUserProvider, UserProvider>();
             
@@ -60,6 +61,7 @@ namespace PocketIS.Framwork
             services.AddTransient<IOrganizationalContextRepository, OrganizationalContextRepository>();
             services.AddTransient<IDeviceRepository, DeviceRepository>();
             services.AddTransient<IRiskAnalysisRepository, RiskAnalysisRepository>();
+            services.AddTransient<IComplaintRepository, ComplaintRepository>();
 
             return services;
         }
