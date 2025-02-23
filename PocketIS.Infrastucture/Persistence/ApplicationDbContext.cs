@@ -30,6 +30,7 @@ namespace PocketIS.Infrastucture.Persistence
         public DbSet<Device> Devices { get; set; }
         public DbSet<RiskAnalys> RiskAnalyses { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Audit> Audits { get; set; }
         public Task<int> SaveChangesAsync()
         {
             return base.SaveChangesAsync();

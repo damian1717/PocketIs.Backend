@@ -24,6 +24,7 @@ namespace PocketIS.Application.Common.Interfaces
         DbSet<Device> Devices { get; set; }
         DbSet<RiskAnalys> RiskAnalyses { get; set; }
         DbSet<Complaint> Complaints { get; set; }
+        DbSet<Audit> Audits { get; set; }
         Task<int> SaveChangesAsync();
     }
 }

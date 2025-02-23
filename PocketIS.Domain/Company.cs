@@ -56,5 +56,6 @@ namespace PocketIS.Domain
         public ICollection<OrganizationalContext> OrganizationalContexts { get; } = new List<OrganizationalContext>();
         public ICollection<Device> Devices { get; } = new List<Device>();
         public ICollection<Complaint> Complaints { get; } = new List<Complaint>();
+        public ICollection<Audit> Audits { get; } = new List<Audit>();
     }
 }
